@@ -13,4 +13,5 @@
 - (void)performCommandInTerminal:(NSString *)command;
 - (NSString *)runExecutable:(NSString *)path withArguments:(NSString *)arguments inTerminal:(BOOL)inTerminal;
 - (NSString *)escapeString:(NSString *)string;
+- (BOOL)sudoIfNeeded;
 @end

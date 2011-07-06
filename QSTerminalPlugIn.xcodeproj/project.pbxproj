@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 42;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -30,7 +30,7 @@
 		7F35FF3D07F9ACD90056051D /* QSEffects.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QSEffects.framework; sourceTree = QSFrameworks; };
 		7F35FF3E07F9ACD90056051D /* QSFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QSFoundation.framework; sourceTree = QSFrameworks; };
 		7F35FF3F07F9ACD90056051D /* QSInterface.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QSInterface.framework; sourceTree = QSFrameworks; };
-		7F55E6450843927100A29511 /* QSSudoPasswordAlert.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = QSSudoPasswordAlert.nib; sourceTree = "<group>"; };
+		7F55E6450843927100A29511 /* QSSudoPasswordAlert.nib */ = {isa = PBXFileReference; explicitFileType = wrapper.nib; path = QSSudoPasswordAlert.nib; sourceTree = "<group>"; };
 		7FE52C13082B12AC00BFD611 /* QSCLExecutableProvider.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = QSCLExecutableProvider.h; sourceTree = "<group>"; };
 		7FE52C14082B12AC00BFD611 /* QSTerminalMediator.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = QSTerminalMediator.h; sourceTree = "<group>"; };
 		7FE52C16082B12AC00BFD611 /* QSCLExecutableProvider.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = QSCLExecutableProvider.m; sourceTree = "<group>"; };
@@ -40,6 +40,7 @@
 		7FFA8E9D0816CCCA00A858CD /* QSInterface.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QSInterface.framework; sourceTree = QSFrameworks; };
 		8D1AC9730486D14A00FE50C9 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D1AC9740486D14A00FE50C9 /* Terminal Module.qsplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Terminal Module.qsplugin"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CDF5416F13C4714300CB9B3F /* Terminal.original.scpt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.scpt; name = Terminal.original.scpt; path = Apps/QuicksilverPlugins/TerminalPlugin/Terminal.original.scpt; sourceTree = DEVELOPER_DIR; };
 		DD92D38A0106425D02CA0E72 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
@@ -74,6 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				7F55E6450843927100A29511 /* QSSudoPasswordAlert.nib */,
+				CDF5416F13C4714300CB9B3F /* Terminal.original.scpt */,
 				7FE52C1A082B12B100BFD611 /* Terminal.scpt */,
 				8D1AC9730486D14A00FE50C9 /* Info.plist */,
 			);
@@ -172,8 +174,15 @@
 		0259C573FE90428111CA0C5A /* Project object */ = {
 			isa = PBXProject;
 			buildConfigurationList = 7FFF2579085E488700266176 /* Build configuration list for PBXProject "QSTerminalPlugIn" */;
-			compatibilityVersion = "Xcode 2.4";
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
 			mainGroup = 0259C574FE90428111CA0C5A /* QSTerminalPlugIn */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -248,6 +257,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1438174710D0F9430027C6ED /* Debug.xcconfig */;
 			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
@@ -255,6 +266,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1438174D10D0F9430027C6ED /* Release.xcconfig */;
 			buildSettings = {
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};
