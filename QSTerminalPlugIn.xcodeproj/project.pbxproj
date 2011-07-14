@@ -9,11 +9,11 @@
 /* Begin PBXBuildFile section */
 		7F35FF4007F9ACD90056051D /* QSCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F35FF3C07F9ACD90056051D /* QSCore.framework */; };
 		7F35FF4207F9ACD90056051D /* QSFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F35FF3E07F9ACD90056051D /* QSFoundation.framework */; };
-		7F55E6460843927100A29511 /* QSSudoPasswordAlert.nib in Resources */ = {isa = PBXBuildFile; fileRef = 7F55E6450843927100A29511 /* QSSudoPasswordAlert.nib */; };
 		7FE52C18082B12AC00BFD611 /* QSCLExecutableProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FE52C16082B12AC00BFD611 /* QSCLExecutableProvider.m */; };
 		7FE52C19082B12AC00BFD611 /* QSTerminalMediator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FE52C17082B12AC00BFD611 /* QSTerminalMediator.m */; };
 		7FE52C46082B149E00BFD611 /* Terminal.scpt in Resources */ = {isa = PBXBuildFile; fileRef = 7FE52C1A082B12B100BFD611 /* Terminal.scpt */; };
 		8D1AC9700486D14A00FE50C9 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD92D38A0106425D02CA0E72 /* Cocoa.framework */; };
+		CD793D6E13CF83FD00B3773B /* QSSudoPasswordAlert.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD793D6D13CF83FD00B3773B /* QSSudoPasswordAlert.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,7 +30,6 @@
 		7F35FF3D07F9ACD90056051D /* QSEffects.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QSEffects.framework; sourceTree = QSFrameworks; };
 		7F35FF3E07F9ACD90056051D /* QSFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QSFoundation.framework; sourceTree = QSFrameworks; };
 		7F35FF3F07F9ACD90056051D /* QSInterface.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QSInterface.framework; sourceTree = QSFrameworks; };
-		7F55E6450843927100A29511 /* QSSudoPasswordAlert.nib */ = {isa = PBXFileReference; explicitFileType = wrapper.nib; path = QSSudoPasswordAlert.nib; sourceTree = "<group>"; };
 		7FE52C13082B12AC00BFD611 /* QSCLExecutableProvider.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = QSCLExecutableProvider.h; sourceTree = "<group>"; };
 		7FE52C14082B12AC00BFD611 /* QSTerminalMediator.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = QSTerminalMediator.h; sourceTree = "<group>"; };
 		7FE52C16082B12AC00BFD611 /* QSCLExecutableProvider.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = QSCLExecutableProvider.m; sourceTree = "<group>"; };
@@ -40,6 +39,7 @@
 		7FFA8E9D0816CCCA00A858CD /* QSInterface.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QSInterface.framework; sourceTree = QSFrameworks; };
 		8D1AC9730486D14A00FE50C9 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D1AC9740486D14A00FE50C9 /* Terminal Module.qsplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Terminal Module.qsplugin"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD793D6D13CF83FD00B3773B /* QSSudoPasswordAlert.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = QSSudoPasswordAlert.xib; path = Apps/QuicksilverPlugins/TerminalPlugin/QSSudoPasswordAlert.xib; sourceTree = DEVELOPER_DIR; };
 		CDF5416F13C4714300CB9B3F /* Terminal.original.scpt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.scpt; name = Terminal.original.scpt; path = Apps/QuicksilverPlugins/TerminalPlugin/Terminal.original.scpt; sourceTree = DEVELOPER_DIR; };
 		DD92D38A0106425D02CA0E72 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
@@ -74,7 +74,7 @@
 		0259C582FE90428111CA0C5A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				7F55E6450843927100A29511 /* QSSudoPasswordAlert.nib */,
+				CD793D6D13CF83FD00B3773B /* QSSudoPasswordAlert.xib */,
 				CDF5416F13C4714300CB9B3F /* Terminal.original.scpt */,
 				7FE52C1A082B12B100BFD611 /* Terminal.scpt */,
 				8D1AC9730486D14A00FE50C9 /* Info.plist */,
@@ -198,7 +198,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7FE52C46082B149E00BFD611 /* Terminal.scpt in Resources */,
-				7F55E6460843927100A29511 /* QSSudoPasswordAlert.nib in Resources */,
+				CD793D6E13CF83FD00B3773B /* QSSudoPasswordAlert.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,6 +258,7 @@
 			baseConfigurationReference = 1438174710D0F9430027C6ED /* Debug.xcconfig */;
 			buildSettings = {
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -266,6 +267,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1438174D10D0F9430027C6ED /* Release.xcconfig */;
 			buildSettings = {
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				SDKROOT = macosx;
 			};
 			name = Release;
