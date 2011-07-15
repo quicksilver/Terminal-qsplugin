@@ -197,10 +197,10 @@
 
 
 - (BOOL)sudoIfNeeded{
-	BOOL status=YES;
+	int status=1;
 	while (status) {
 		NSTask *task=[NSTask taskWithLaunchPath:@"/usr/bin/sudo" arguments:[NSArray arrayWithObjects:@"-v",@"-S",nil]];
-		[task setStandardInput:[NSPipe pipe]]; 
+		[task setStandardInput:[NSPipe pipe]];
 		[task setStandardError:[NSPipe pipe]];
 		[task launch];
 		NSData *data= [[[task standardError]fileHandleForReading]availableData];
@@ -220,8 +220,8 @@
 			}
 			// Obtains the password from the window, initial first responder is always the secure text field
 			NSString *string=[(NSSecureTextField *)[window initialFirstResponder] stringValue];
+			string=[string stringByAppendingString:@"\n"];
 			NSData *writeData = [string dataUsingEncoding:NSUTF8StringEncoding];
-			//string=[string stringByAppendingString:@"\n"];
 			[[[task standardInput]fileHandleForWriting] writeData:writeData];
 			[[[task standardInput]fileHandleForWriting] closeFile];
 		}
