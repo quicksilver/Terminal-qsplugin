@@ -46,7 +46,9 @@
         if (!executable){
             NSString *contents=[NSString stringWithContentsOfFile:path];
             if ([contents hasPrefix:@"#!"])executable=YES;
-			else if (VERBOSE) NSLog(@"No Shebang found");
+#ifdef DEBUG
+			NSLog(@"No Shebang found");
+#endif
         }else{
             LSItemInfoRecord infoRec;
             LSCopyItemInfoForURL((CFURLRef)[NSURL fileURLWithPath:path],kLSRequestBasicFlagsOnly, &infoRec);
@@ -97,10 +99,11 @@
 	 //[argArray addObject:taskPath];
 	 //}
     
-    if ([arguments length]);
-    [argArray addObjectsFromArray:[arguments componentsSeparatedByString:@" "]];
-
-    if (inTerminal){
+    if ([arguments length]) {
+		[argArray addObjectsFromArray:[arguments componentsSeparatedByString:@" "]];
+	}
+	
+    if (inTerminal) {
         NSString *fullCommand=[NSString stringWithFormat:@"%@ %@",[self escapeString:taskPath],[argArray componentsJoinedByString:@" "]];
         [self performCommandInTerminal:fullCommand];      
 		///  NSLog(@"Run Shell Script: %@",fullCommand);
@@ -119,8 +122,8 @@
         if (status == 0) NSLog(@"Task succeeded.");
         else NSLog(@"Task failed.");
         return string;
-}
-return nil;
+	}
+	return nil;
 }
 - (NSString *)escapeString:(NSString *)string{
     NSString *escapeString=@"\\!$&\"'*(){[|;<>?~` ";
@@ -145,7 +148,9 @@ return nil;
 	if (!string)string=[dObject stringValue];
 	
 	if ([string rangeOfString:@"sudo" options:NSCaseInsensitiveSearch].location!=NSNotFound){
+#ifdef DEBUG
 		NSLog(@"sudo in %@",string);
+#endif
 		if (![self sudoIfNeeded]){
 			NSBeep();
 			return nil;
@@ -184,7 +189,7 @@ return nil;
 }
 
 - (void)performCommandInTerminal:(NSString *)command{
-	[[QSReg preferredTerminalMediator]performCommandInTerminal:(NSString *)command];
+	[[QSReg preferredTerminalMediator] performCommandInTerminal:(NSString *)command];
 }
 - (void)ok:(id)sender{[NSApp stopModalWithCode:1];}
 - (void)cancel:(id)sender{[NSApp stopModalWithCode:0];}
@@ -192,27 +197,33 @@ return nil;
 
 
 - (BOOL)sudoIfNeeded{
-	BOOL status=YES;
-	while (status){
+	int status=1;
+	while (status) {
 		NSTask *task=[NSTask taskWithLaunchPath:@"/usr/bin/sudo" arguments:[NSArray arrayWithObjects:@"-v",@"-S",nil]];
-		[task setStandardInput:[NSPipe pipe]]; 
+		[task setStandardInput:[NSPipe pipe]];
 		[task setStandardError:[NSPipe pipe]];
 		[task launch];
 		NSData *data= [[[task standardError]fileHandleForReading]availableData];
-		if ([data length]){
-			if (!window)[NSBundle loadNibNamed:@"QSSudoPasswordAlert" owner:self];
+
+		// Password is required
+		if ([data length]) {
+			if (!window) {
+				[NSBundle loadNibNamed:@"QSSudoPasswordAlert" owner:self];
+			}
 			[window makeKeyAndOrderFront:self];
-			int result=[NSApp runModalForWindow:window];
+			int result = [NSApp runModalForWindow:window];
 			[window close];
 			
 			if (!result){
 				[task interrupt];
 				return NO;
 			}
-			NSString *string=[[window initialFirstResponder]stringValue];
-			//string=[string stringByAppendingString:@"\n"];
-			[[[task standardInput]fileHandleForWriting]writeData:[string dataUsingEncoding:NSUTF8StringEncoding]];
-			[[[task standardInput]fileHandleForWriting]closeFile];
+			// Obtains the password from the window, initial first responder is always the secure text field
+			NSString *string=[(NSSecureTextField *)[window initialFirstResponder] stringValue];
+			string=[string stringByAppendingString:@"\n"];
+			NSData *writeData = [string dataUsingEncoding:NSUTF8StringEncoding];
+			[[[task standardInput]fileHandleForWriting] writeData:writeData];
+			[[[task standardInput]fileHandleForWriting] closeFile];
 		}
 		
 		usleep(250000);	
@@ -222,9 +233,8 @@ return nil;
 			status=[task terminationStatus];
 		if (status)
 			NSBeep();
-			//NSLog(@"term %d",status);
+		//NSLog(@"term %d",status);
 	}
-	
 	return !status;
 }
 
