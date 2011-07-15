@@ -74,6 +74,7 @@
 		0259C582FE90428111CA0C5A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CD793EBF13CF8D6800B3773B /* QSSudoPasswordAlert.xib */,
 				CD793EB913CF8D3300B3773B /* Terminal.original.scpt */,
 				7FE52C1A082B12B100BFD611 /* Terminal.scpt */,
 				8D1AC9730486D14A00FE50C9 /* Info.plist */,
@@ -131,7 +132,6 @@
 		32DBCF9F0370C38200C91783 /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
-				CD793EBF13CF8D6800B3773B /* QSSudoPasswordAlert.xib */,
 				32DBCF980370C29C00C91783 /* QSTerminalPlugIn.h */,
 			);
 			name = "Other Sources";
