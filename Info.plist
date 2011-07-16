@@ -136,6 +136,7 @@
 			<key>directFileTypes</key>
 			<array>
 				<string>&apos;fold&apos;</string>
+				<string>*</string>
 			</array>
 			<key>directTypes</key>
 			<array>

@@ -183,6 +183,11 @@
 
 - (QSObject *) showDirectoryInTerminal:(QSObject *)dObject{
     NSString *path=[dObject singleFilePath];
+    if (![[[NSWorkspace sharedWorkspace] typeOfFile:path error:nil] isEqualToString:@"public.folder"]);
+    {
+      NSArray *comps = [path pathComponents];
+      path = [NSString pathWithComponents:[comps subarrayWithRange:(NSRange){0, [comps count] - 1}]];
+    }
     //  NSLog(@"path %@",path);
     [self performCommandInTerminal:[NSString stringWithFormat:@"cd %@",[self escapeString:path]]];
     return nil;
