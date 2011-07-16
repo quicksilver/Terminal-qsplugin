@@ -145,7 +145,7 @@
 			<key>icon</key>
 			<string>TerminalIcon</string>
 			<key>name</key>
-			<string>Go To Directory in Terminal</string>
+			<string>Open in Terminal</string>
 		</dict>
 		<key>QSCLTermShowManPageAction</key>
 		<dict>
