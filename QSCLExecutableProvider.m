@@ -17,7 +17,7 @@
 #define kQSCLTermExecuteWithArgsAction @"QSCLTermExecuteWithArgsAction"
 #define kQSCLTermShowDirectoryAction @"QSCLTermShowDirectoryAction"
 #define kQSCLTermShowManPageAction @"QSCLTermShowManPageAction"
-
+#define kQSCLTermOpenParentAction @"QSCLTermOpenParentAction"
 
 #define kQSCLExecuteTextAction @"QSCLExecuteTextAction"
 #define kQSCLTermExecuteTextAction @"QSCLTermExecuteTextAction"
@@ -36,8 +36,8 @@
         
 		BOOL isDirectory;
         
-        if ([[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:&isDirectory] && isDirectory)
-			return [NSArray arrayWithObject:kQSCLTermShowDirectoryAction];
+        if ([[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:&isDirectory] && (!isDirectory))
+			return [NSArray arrayWithObject:kQSCLTermOpenParentAction];
         
         
         BOOL executable=[[NSFileManager defaultManager] isExecutableFileAtPath:path];
@@ -183,6 +183,12 @@
 
 - (QSObject *) showDirectoryInTerminal:(QSObject *)dObject{
     NSString *path=[dObject singleFilePath];
+    BOOL isDir = NO;
+    while (!([[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:&isDir] && isDir))
+    {
+      NSArray *comps = [path pathComponents];
+      path = [NSString pathWithComponents:[comps subarrayWithRange:(NSRange){0, [comps count] - 1}]];
+    }
     //  NSLog(@"path %@",path);
     [self performCommandInTerminal:[NSString stringWithFormat:@"cd %@",[self escapeString:path]]];
     return nil;
