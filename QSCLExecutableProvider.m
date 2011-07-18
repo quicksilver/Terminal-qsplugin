@@ -17,7 +17,7 @@
 #define kQSCLTermExecuteWithArgsAction @"QSCLTermExecuteWithArgsAction"
 #define kQSCLTermShowDirectoryAction @"QSCLTermShowDirectoryAction"
 #define kQSCLTermShowManPageAction @"QSCLTermShowManPageAction"
-
+#define kQSCLTermOpenParentAction @"QSCLTermOpenParentAction"
 
 #define kQSCLExecuteTextAction @"QSCLExecuteTextAction"
 #define kQSCLTermExecuteTextAction @"QSCLTermExecuteTextAction"
@@ -36,8 +36,8 @@
         
 		BOOL isDirectory;
         
-        if ([[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:&isDirectory] && isDirectory)
-			return [NSArray arrayWithObject:kQSCLTermShowDirectoryAction];
+        if ([[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:&isDirectory] && (!isDirectory))
+			return [NSArray arrayWithObject:kQSCLTermOpenParentAction];
         
         
         BOOL executable=[[NSFileManager defaultManager] isExecutableFileAtPath:path];
