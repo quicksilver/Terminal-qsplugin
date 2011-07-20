@@ -144,7 +144,24 @@
 			<key>icon</key>
 			<string>TerminalIcon</string>
 			<key>name</key>
-			<string>Go To Directory in Terminal</string>
+			<string>Open in Terminal</string>
+		</dict>
+		<key>QSCLTermOpenParentAction</key>
+		<dict>
+			<key>actionClass</key>
+			<string>QSCLExecutableProvider</string>
+			<key>actionSelector</key>
+			<string>showDirectoryInTerminal:</string>
+			<key>directTypes</key>
+			<array>
+				<string>NSFilenamesPboardType</string>
+			</array>
+			<key>icon</key>
+			<string>TerminalIcon</string>
+			<key>name</key>
+			<string>Open Parent Directory in Terminal</string>
+			<key>validatesObjects</key>
+			<true/>
 		</dict>
 		<key>QSCLTermShowManPageAction</key>
 		<dict>
