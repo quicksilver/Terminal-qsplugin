@@ -144,7 +144,7 @@
 			<key>icon</key>
 			<string>TerminalIcon</string>
 			<key>name</key>
-			<string>Open in Terminal</string>
+			<string>Open Directory in Terminal</string>
 		</dict>
 		<key>QSCLTermOpenParentAction</key>
 		<dict>
