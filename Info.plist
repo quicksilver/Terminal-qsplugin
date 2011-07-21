@@ -133,10 +133,6 @@
 			<string>QSCLExecutableProvider</string>
 			<key>actionSelector</key>
 			<string>showDirectoryInTerminal:</string>
-			<key>directFileTypes</key>
-			<array>
-				<string>&apos;fold&apos;</string>
-			</array>
 			<key>directTypes</key>
 			<array>
 				<string>NSFilenamesPboardType</string>
@@ -145,13 +141,15 @@
 			<string>TerminalIcon</string>
 			<key>name</key>
 			<string>Open Directory in Terminal</string>
+			<key>validatesObjects</key>
+			<true/>
 		</dict>
 		<key>QSCLTermOpenParentAction</key>
 		<dict>
 			<key>actionClass</key>
 			<string>QSCLExecutableProvider</string>
 			<key>actionSelector</key>
-			<string>showDirectoryInTerminal:</string>
+			<string>showParentDirectoryInTerminal:</string>
 			<key>directTypes</key>
 			<array>
 				<string>NSFilenamesPboardType</string>
