@@ -29,38 +29,44 @@
 
 @implementation QSCLExecutableProvider
 
-- (NSArray *)validActionsForDirectObject:(QSObject *)dObject indirectObject:(QSObject *)iObject{
-    if ([dObject objectForType:NSFilenamesPboardType]){
-        NSString *path=[dObject singleFilePath];
-        if (!path)return nil;
-        
-		BOOL isDirectory;
-        
-        if ([[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:&isDirectory] && (!isDirectory))
-			return [NSArray arrayWithObject:kQSCLTermOpenParentAction];
-        
-        
-        BOOL executable=[[NSFileManager defaultManager] isExecutableFileAtPath:path];
-        //NSLog(@"exec %d",executable);
-        if (![QSShellScriptTypes containsObject:[[NSFileManager defaultManager]typeOfFile:path]]) return nil;
-        if (!executable){
-            NSString *contents=[NSString stringWithContentsOfFile:path];
-            if ([contents hasPrefix:@"#!"])executable=YES;
-#ifdef DEBUG
-			NSLog(@"No Shebang found");
-#endif
-        }else{
-            LSItemInfoRecord infoRec;
-            LSCopyItemInfoForURL((CFURLRef)[NSURL fileURLWithPath:path],kLSRequestBasicFlagsOnly, &infoRec);
-            if (infoRec.flags & kLSItemInfoIsApplication) // Ignore applications
-                executable=NO;
+- (NSArray *)validActionsForDirectObject:(QSObject *)dObject indirectObject:(QSObject *)iObject
+{
+  if ([dObject objectForType:NSFilenamesPboardType])
+  {
+    NSString *path = [dObject singleFilePath];
+    if (!path) return nil;
+    
+    BOOL isDirectory = NO;
+    if (![[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:&isDirectory]) return nil;
+    
+    if (isDirectory) return [NSArray arrayWithObject:kQSCLTermShowDirectoryAction];
+    
+    if ([QSShellScriptTypes containsObject:[[NSFileManager defaultManager] typeOfFile:path]])
+    {
+      BOOL executable = [[NSFileManager defaultManager] isExecutableFileAtPath:path];
+      if (!executable)
+      {
+        NSString *contents = [NSString stringWithContentsOfFile:path];
+        if ([contents hasPrefix:@"#!"]) executable = YES;
+      }
+      else
+      {
+        LSItemInfoRecord infoRec;
+        LSCopyItemInfoForURL((CFURLRef)[NSURL fileURLWithPath:path], kLSRequestBasicFlagsOnly, &infoRec);
+        if (infoRec.flags & kLSItemInfoIsApplication)
+        {
+          // Ignore applications
+          executable = NO;
         }
-        if (executable){
-            return [NSArray arrayWithObjects:kQSCLExecuteWithArgsAction,kQSCLTermExecuteWithArgsAction,kQSCLTermShowManPageAction,nil];
-        }
+      }
+      
+      if (executable) return [NSArray arrayWithObjects:kQSCLExecuteWithArgsAction, kQSCLTermExecuteWithArgsAction, kQSCLTermShowManPageAction, kQSCLTermOpenParentAction, nil];
     }
-    //NSLog(@"nope %@",[[dObject singleFilePath]pathExtension]);
-    return nil;
+    
+    return [NSArray arrayWithObject:kQSCLTermOpenParentAction];
+  }
+  
+  return nil;
 }
 
 - (NSArray *)validIndirectObjectsForAction:(NSString *)action directObject:(QSObject *)dObject{
@@ -181,17 +187,31 @@
 	return nil;
 }
 
-- (QSObject *) showDirectoryInTerminal:(QSObject *)dObject{
-    NSString *path=[dObject singleFilePath];
-    BOOL isDir = NO;
-    while (!([[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:&isDir] && isDir))
-    {
-      NSArray *comps = [path pathComponents];
-      path = [NSString pathWithComponents:[comps subarrayWithRange:(NSRange){0, [comps count] - 1}]];
-    }
-    //  NSLog(@"path %@",path);
-    [self performCommandInTerminal:[NSString stringWithFormat:@"cd %@",[self escapeString:path]]];
-    return nil;
+- (void)openTerminalAtDirectory:(NSString *)path
+{
+  BOOL isDir = NO;
+  while (!([[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:&isDir] && isDir))
+  {
+    NSArray *comps = [path pathComponents];
+    path = [NSString pathWithComponents:[comps subarrayWithRange:(NSRange){0, [comps count] - 1}]];
+  }
+  [self performCommandInTerminal:[NSString stringWithFormat:@"cd %@", [self escapeString:path]]];
+}
+
+- (QSObject *)showParentDirectoryInTerminal:(QSObject *)dObject
+{
+  NSString *path = [dObject singleFilePath];
+  NSArray *comps = [path pathComponents];
+  if ([comps count] > 1) path = [NSString pathWithComponents:[comps subarrayWithRange:(NSRange){0, [comps count] - 1}]];
+  [self openTerminalAtDirectory:path];
+  return nil;
+}
+
+- (QSObject *)showDirectoryInTerminal:(QSObject *)dObject
+{
+  NSString *path = [dObject singleFilePath];
+  [self openTerminalAtDirectory:path];
+  return nil;
 }
 
 - (void)performCommandInTerminal:(NSString *)command{
