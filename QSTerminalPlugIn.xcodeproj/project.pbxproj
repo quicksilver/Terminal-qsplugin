@@ -237,6 +237,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1438174910D0F9430027C6ED /* QSPlugIn_Debug.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				OTHER_LDFLAGS = "-bundle";
 				PRODUCT_NAME = "Terminal Module";
 				ZERO_LINK = YES;
@@ -247,6 +248,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1438174B10D0F9430027C6ED /* QSPlugIn_Release.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				OTHER_LDFLAGS = "-bundle";
 				PRODUCT_NAME = "Terminal Module";
 				ZERO_LINK = NO;
@@ -257,9 +259,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1438174710D0F9430027C6ED /* Debug.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
-				SDKROOT = macosx;
+				SDKROOT = "";
 			};
 			name = Debug;
 		};
@@ -267,8 +270,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1438174D10D0F9430027C6ED /* Release.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
-				SDKROOT = macosx;
+				SDKROOT = "";
 			};
 			name = Release;
 		};
