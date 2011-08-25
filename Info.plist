@@ -15,9 +15,9 @@
 	<key>CFBundlePackageType</key>
 	<string>BNDL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2.1.0</string>
+	<string>2.1.1</string>
 	<key>CFBundleVersion</key>
-	<string>120</string>
+	<string>121</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2004, Blacktree, Inc.</string>
 	<key>QSActions</key>
@@ -127,23 +127,6 @@
 			<key>validatesObjects</key>
 			<true/>
 		</dict>
-		<key>QSCLTermShowDirectoryAction</key>
-		<dict>
-			<key>actionClass</key>
-			<string>QSCLExecutableProvider</string>
-			<key>actionSelector</key>
-			<string>showDirectoryInTerminal:</string>
-			<key>directTypes</key>
-			<array>
-				<string>NSFilenamesPboardType</string>
-			</array>
-			<key>icon</key>
-			<string>TerminalIcon</string>
-			<key>name</key>
-			<string>Open Directory in Terminal</string>
-			<key>validatesObjects</key>
-			<true/>
-		</dict>
 		<key>QSCLTermOpenParentAction</key>
 		<dict>
 			<key>actionClass</key>
@@ -158,6 +141,23 @@
 			<string>TerminalIcon</string>
 			<key>name</key>
 			<string>Open Parent Directory in Terminal</string>
+			<key>validatesObjects</key>
+			<true/>
+		</dict>
+		<key>QSCLTermShowDirectoryAction</key>
+		<dict>
+			<key>actionClass</key>
+			<string>QSCLExecutableProvider</string>
+			<key>actionSelector</key>
+			<string>showDirectoryInTerminal:</string>
+			<key>directTypes</key>
+			<array>
+				<string>NSFilenamesPboardType</string>
+			</array>
+			<key>icon</key>
+			<string>TerminalIcon</string>
+			<key>name</key>
+			<string>Open Directory in Terminal</string>
 			<key>validatesObjects</key>
 			<true/>
 		</dict>
