@@ -1,14 +1,4 @@
-
-
 #import "QSCLExecutableProvider.h"
-
-
-#import <QSCore/QSCore.h>
-
-
-#import <QSCore/QSObject_StringHandling.h>
-
-#import <QSCore/QSDefines.h>
 #include "QSTerminalPlugIn.h"
 
 //#define kQSCLExecuteAction @"ShellScriptRunAction"
