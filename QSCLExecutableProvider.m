@@ -124,8 +124,7 @@
 - (NSString *)escapeString:(NSString *)string{
     NSString *escapeString=@"\\!$&\"'*(){[|;<>?~` ";
     
-    int i;
-    for (i=0;i<[escapeString length];i++){
+    for (NSUInteger i = 0; i < [escapeString length]; i++) {
         NSString *thisString=[escapeString substringWithRange:NSMakeRange(i,1)];
         string=[[string componentsSeparatedByString:thisString]componentsJoinedByString:[@"\\" stringByAppendingString:thisString]];
         
