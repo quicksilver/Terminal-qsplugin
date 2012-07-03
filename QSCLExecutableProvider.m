@@ -36,7 +36,7 @@
       BOOL executable = [[NSFileManager defaultManager] isExecutableFileAtPath:path];
       if (!executable)
       {
-        NSString *contents = [NSString stringWithContentsOfFile:path];
+        NSString *contents = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
         if ([contents hasPrefix:@"#!"]) executable = YES;
       }
       else
@@ -84,7 +84,7 @@
     NSMutableArray *argArray=[NSMutableArray array]; 
     
     if (!executable){
-        NSString *contents=[NSString stringWithContentsOfFile:path];
+        NSString *contents=[NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
         NSScanner *scanner=[NSScanner scannerWithString:contents];
         [argArray addObject:taskPath];
         [scanner scanString:@"#!" intoString:nil];
