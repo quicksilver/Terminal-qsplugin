@@ -1,4 +1,5 @@
 #import "QSCLExecutableProvider.h"
+#import "QSTerminalMediator.h"
 #include "QSTerminalPlugIn.h"
 
 //#define kQSCLExecuteAction @"ShellScriptRunAction"
