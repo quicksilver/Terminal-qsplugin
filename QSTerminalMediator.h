@@ -6,9 +6,6 @@
 //  Copyright 2004 __MyCompanyName__. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
-#import <QSCore/QSRegistry.h>
-
 #define kQSTerminalMediators @"QSTerminalMediators"
 
 @protocol QSTerminalMediator
