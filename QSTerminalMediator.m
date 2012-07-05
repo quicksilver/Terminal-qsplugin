@@ -8,8 +8,6 @@
 
 #import "QSTerminalMediator.h"
 
-
-#import "QSTerminalMediator.h"
 @implementation QSRegistry (QSTerminalMediator)
 - (NSString *)preferredTerminalMediatorID{
 	NSString *key=[[NSUserDefaults standardUserDefaults] stringForKey:kQSTerminalMediators];

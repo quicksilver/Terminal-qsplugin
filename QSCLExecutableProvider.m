@@ -1,14 +1,5 @@
-
-
 #import "QSCLExecutableProvider.h"
-
-
-#import <QSCore/QSCore.h>
-
-
-#import <QSCore/QSObject_StringHandling.h>
-
-#import <QSCore/QSDefines.h>
+#import "QSTerminalMediator.h"
 #include "QSTerminalPlugIn.h"
 
 //#define kQSCLExecuteAction @"ShellScriptRunAction"
@@ -46,7 +37,7 @@
       BOOL executable = [[NSFileManager defaultManager] isExecutableFileAtPath:path];
       if (!executable)
       {
-        NSString *contents = [NSString stringWithContentsOfFile:path];
+        NSString *contents = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
         if ([contents hasPrefix:@"#!"]) executable = YES;
       }
       else
@@ -94,7 +85,7 @@
     NSMutableArray *argArray=[NSMutableArray array]; 
     
     if (!executable){
-        NSString *contents=[NSString stringWithContentsOfFile:path];
+        NSString *contents=[NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
         NSScanner *scanner=[NSScanner scannerWithString:contents];
         [argArray addObject:taskPath];
         [scanner scanString:@"#!" intoString:nil];
@@ -134,8 +125,7 @@
 - (NSString *)escapeString:(NSString *)string{
     NSString *escapeString=@"\\!$&\"'*(){[|;<>?~` ";
     
-    int i;
-    for (i=0;i<[escapeString length];i++){
+    for (NSUInteger i = 0; i < [escapeString length]; i++) {
         NSString *thisString=[escapeString substringWithRange:NSMakeRange(i,1)];
         string=[[string componentsSeparatedByString:thisString]componentsJoinedByString:[@"\\" stringByAppendingString:thisString]];
         
