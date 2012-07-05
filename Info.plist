@@ -232,10 +232,6 @@
 		<string>Allows running of shell scripts in Quicksilver or the Terminal</string>
 		<key>icon</key>
 		<string>com.apple.Terminal</string>
-		<key>relatedBundles</key>
-		<array>
-			<string>com.apple.Terminal</string>
-		</array>
 		<key>requiresFeature</key>
 		<string>0</string>
 	</dict>
