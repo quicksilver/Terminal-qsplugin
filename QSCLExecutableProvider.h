@@ -1,11 +1,3 @@
-
-
-#import <Foundation/Foundation.h>
-
-#import <QSCore/QSActionProvider.h>
-
-
-
 @interface QSCLExecutableProvider : QSActionProvider {
 	IBOutlet NSWindow *window;
 }
