@@ -235,7 +235,7 @@
 			baseConfigurationReference = D40FD3AA15A39810008979BE /* QSPlugIn.xcconfig */;
 			buildSettings = {
 				OTHER_LDFLAGS = "-bundle";
-				PRODUCT_NAME = "Terminal Module";
+				PRODUCT_NAME = "Terminal Plugin";
 				ZERO_LINK = YES;
 			};
 			name = Debug;
@@ -245,7 +245,7 @@
 			baseConfigurationReference = D40FD3AA15A39810008979BE /* QSPlugIn.xcconfig */;
 			buildSettings = {
 				OTHER_LDFLAGS = "-bundle";
-				PRODUCT_NAME = "Terminal Module";
+				PRODUCT_NAME = "Terminal Plugin";
 				ZERO_LINK = NO;
 			};
 			name = Release;
