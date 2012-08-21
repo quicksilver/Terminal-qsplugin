@@ -34,24 +34,24 @@
     
     if ([QSShellScriptTypes containsObject:[[NSFileManager defaultManager] typeOfFile:path]])
     {
-      BOOL executable = [[NSFileManager defaultManager] isExecutableFileAtPath:path];
-      if (!executable)
-      {
-        NSString *contents = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
-        if ([contents hasPrefix:@"#!"]) executable = YES;
-      }
-      else
-      {
-        LSItemInfoRecord infoRec;
-        LSCopyItemInfoForURL((CFURLRef)[NSURL fileURLWithPath:path], kLSRequestBasicFlagsOnly, &infoRec);
-        if (infoRec.flags & kLSItemInfoIsApplication)
-        {
-          // Ignore applications
-          executable = NO;
+        BOOL executable = [[NSFileManager defaultManager] isExecutableFileAtPath:path];
+        if (!executable) {
+            NSFileHandle * fileHandle = [NSFileHandle fileHandleForReadingAtPath:path];
+            // Read in the first 5 bytes of the file to see if it contains #! (5 bytes, because some files contain byte order marks (3 bytes)
+            NSData * buffer = [fileHandle readDataOfLength:5];
+            NSString *string = [[NSString alloc] initWithData:buffer encoding:NSUTF8StringEncoding];
+            if ([string containsString:@"#!"]) {
+                executable = YES;
+            }
+            [string release];
+        } else {
+            LSItemInfoRecord infoRec;
+            LSCopyItemInfoForURL((CFURLRef) [NSURL fileURLWithPath:path], kLSRequestBasicFlagsOnly, &infoRec);
+            if (infoRec.flags & kLSItemInfoIsApplication) // Ignore applications
+                return NO;
         }
-      }
-      
-      if (executable) return [NSArray arrayWithObjects:kQSCLExecuteWithArgsAction, kQSCLTermExecuteWithArgsAction, kQSCLTermShowManPageAction, kQSCLTermOpenParentAction, nil];
+        
+        if (executable) return [NSArray arrayWithObjects:kQSCLExecuteWithArgsAction, kQSCLTermExecuteWithArgsAction, kQSCLTermShowManPageAction, kQSCLTermOpenParentAction, nil];
     }
     
     return [NSArray arrayWithObject:kQSCLTermOpenParentAction];
