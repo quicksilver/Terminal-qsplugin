@@ -188,9 +188,18 @@
   [self performCommandInTerminal:[NSString stringWithFormat:@"cd %@", [self escapeString:path]]];
 }
 
+-(void)displayOpenTerminalError {
+    NSBeep();
+    QSShowAppNotifWithAttributes(@"TerminalNotif", NSLocalizedStringFromTableInBundle(@"Terminal Plugin", nil, [NSBundle bundleForClass:[self class]], @""), NSLocalizedStringFromTableInBundle(@"Could not open directory", nil, [NSBundle bundleForClass:[self class]], @""));
+}
+
 - (QSObject *)showParentDirectoryInTerminal:(QSObject *)dObject
 {
   NSString *path = [dObject singleFilePath];
+    if (!path) {
+        [self displayOpenTerminalError];
+        return nil;
+    }
   NSArray *comps = [path pathComponents];
   if ([comps count] > 1) path = [NSString pathWithComponents:[comps subarrayWithRange:(NSRange){0, [comps count] - 1}]];
   [self openTerminalAtDirectory:path];
@@ -200,6 +209,10 @@
 - (QSObject *)showDirectoryInTerminal:(QSObject *)dObject
 {
   NSString *path = [dObject singleFilePath];
+    if (!path) {
+        [self displayOpenTerminalError];
+        return nil;
+    }
   [self openTerminalAtDirectory:path];
   return nil;
 }
