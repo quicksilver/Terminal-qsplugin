@@ -9,13 +9,10 @@
 #define kQSCLTermShowDirectoryAction @"QSCLTermShowDirectoryAction"
 #define kQSCLTermShowManPageAction @"QSCLTermShowManPageAction"
 #define kQSCLTermOpenParentAction @"QSCLTermOpenParentAction"
-
+#define kQSShellScriptRunWithArgsAction @"QSShellScriptRunWithArgsAction"
 #define kQSCLExecuteTextAction @"QSCLExecuteTextAction"
 #define kQSCLTermExecuteTextAction @"QSCLTermExecuteTextAction"
 
-# define kShellScriptRunAction @"ShellScriptRunAction"
-# define kShellScriptTextRunAction @"ShellScriptTextRunAction"
-# define kShellScriptTextRunInTerminalAction @"ShellScriptTextRunInTerminalAction"
 #define QSShellScriptTypes [NSArray arrayWithObjects:@"sh",@"pl",@"command",@"php",@"py",@"'TEXT'",@"rb",@"",nil]
 
 @implementation QSCLExecutableProvider
@@ -51,7 +48,7 @@
                 return NO;
         }
         
-        if (executable) return [NSArray arrayWithObjects:kQSCLExecuteWithArgsAction, kQSCLTermExecuteWithArgsAction, kQSCLTermShowManPageAction, kQSCLTermOpenParentAction, nil];
+        if (executable) return [NSArray arrayWithObjects:kQSCLExecuteWithArgsAction, kQSCLTermExecuteWithArgsAction, kQSCLTermShowManPageAction, kQSCLTermOpenParentAction,kQSShellScriptRunWithArgsAction, nil];
     }
     
     return [NSArray arrayWithObject:kQSCLTermOpenParentAction];

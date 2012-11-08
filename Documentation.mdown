@@ -1,0 +1,29 @@
+## Terminal Plugin for Quicksilver
+
+The Terminal plugin allows Quicksilver to interact with the OS X Terminal; run commands and shell scripts, open directories in Terminal and more.
+
+### Actions
+
+** Run […]**
+
+This action takes any script in Quicksilver's first pane (.sh, .pl, .command, .php, .py, .rb) and runs it in a Shell. An indirect argument is optional, meaning you can run any script with an argument by inputting text in Quicksilver's third pane. This differs from the 'Run in Terminal […]' action in that it runs the script in a Shell, without opening a new Terminal window.
+
+**Run in Terminal […]**
+
+The Run in Terminal […] action can be used on script files (for example, php, pl, sh, py files) to run these files as scripts in a new Terminal window. The action supports an optional extra argument, entered in Quicksilver's 3rd pane. This differs from the 'run […]' action in that it opens a Terminal window, as opposed to running the script in a Shell.
+
+**Run Command in Shell**
+
+Runs the item in Quicksilver's first pane in a shell, without launching Terminal. The item in Quicksilver's first pane should be a string (entered in Text Mode) of your desired command. If the command returns an item (for example, `ls` returns a list of files and folders) they are returned to Quicksilver as text.
+
+**Run a Text Command in Terminal**
+
+Similar to the 'Run Command in Shell' action, but opens a new Terminal window and runs the command in the new window.
+
+**Open Directory in Terminal, Open Parent Directory in Terminal**
+
+These two actions open the folder or file selected in Quicksilver's first pane in Terminal. The name of the action depends on whether a folder or file is selected in Quicksilver's first pane.
+
+**Show Man Page**
+
+The 'Show Man Page' action can be run on any executable file (typically found in `/usr/bin` or `/usr/local/bin`). It opens a new window with the 'man' page for the selected executable.

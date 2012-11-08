@@ -17,9 +17,9 @@
 	<key>CFBundlePackageType</key>
 	<string>BNDL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2.2.1</string>
+	<string>2.2.2</string>
 	<key>CFBundleVersion</key>
-	<string>129</string>
+	<string>130</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2004, Blacktree, Inc.</string>
 	<key>QSActions</key>
@@ -35,6 +35,7 @@
 			<key>directTypes</key>
 			<array>
 				<string>qs.shellcommand</string>
+				<string>NSStringPboardType</string>
 			</array>
 			<key>displaysResult</key>
 			<true/>
@@ -44,25 +45,6 @@
 			<string>Run Command in Shell</string>
 			<key>precedence</key>
 			<integer>3</integer>
-		</dict>
-		<key>QSCLExecuteTextAction</key>
-		<dict>
-			<key>actionClass</key>
-			<string>QSCLExecutableProvider</string>
-			<key>actionSelector</key>
-			<string>executeText:</string>
-			<key>description</key>
-			<string>Run a Text Command in Shell</string>
-			<key>directTypes</key>
-			<array>
-				<string>NSStringPboardType</string>
-			</array>
-			<key>displaysResult</key>
-			<true/>
-			<key>icon</key>
-			<string>ExecutableBinaryIcon</string>
-			<key>name</key>
-			<string>Run Command in Shell</string>
 		</dict>
 		<key>QSCLTermExecuteShellCommandAction</key>
 		<dict>
@@ -103,7 +85,7 @@
 			<key>actionSelector</key>
 			<string>executeObjectInTerm:arguments:</string>
 			<key>description</key>
-			<string>Run a Shell Script in the Terminal</string>
+			<string>Run a Shell Script in the Terminal [with optional arguments]</string>
 			<key>directFileTypes</key>
 			<array>
 				<string>sh</string>
@@ -123,7 +105,7 @@
 			<key>indirectOptional</key>
 			<true/>
 			<key>name</key>
-			<string>Run in Terminal [...]</string>
+			<string>Run in Terminal […]</string>
 			<key>rankModification</key>
 			<real>2</real>
 			<key>validatesObjects</key>
@@ -184,14 +166,14 @@
 			<key>validatesObjects</key>
 			<true/>
 		</dict>
-		<key>QSShellScriptRunAction</key>
+		<key>QSShellScriptRunWithArgsAction</key>
 		<dict>
 			<key>actionClass</key>
 			<string>QSCLExecutableProvider</string>
 			<key>actionSelector</key>
 			<string>executeObject:arguments:</string>
 			<key>description</key>
-			<string>Run a Shell Script</string>
+			<string>Run a Shell Script [with optional arguments]</string>
 			<key>directFileTypes</key>
 			<array>
 				<string>sh</string>
@@ -213,7 +195,7 @@
 			<key>indirectOptional</key>
 			<true/>
 			<key>name</key>
-			<string>Run [...]</string>
+			<string>Run […]</string>
 			<key>rankModification</key>
 			<real>2</real>
 			<key>validatesObjects</key>
