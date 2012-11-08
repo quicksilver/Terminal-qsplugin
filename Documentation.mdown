@@ -27,3 +27,9 @@ These two actions open the folder or file selected in Quicksilver's first pane i
 **Show Man Page**
 
 The 'Show Man Page' action can be run on any executable file (typically found in `/usr/bin` or `/usr/local/bin`). It opens a new window with the 'man' page for the selected executable.
+
+### Catalog Preset
+
+**Bash Command History**
+
+This <a href="qs://preferences#QSCatalogPrefPane">Catalog</a> Preset, found under 'Plugins > Bash Command History' adds your bash history to the Quicksilver catalog (more accurately, it adds the contents of `~/.bash_history` to your catalog).
