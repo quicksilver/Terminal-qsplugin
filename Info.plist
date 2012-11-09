@@ -44,7 +44,7 @@
 			<key>name</key>
 			<string>Run Command in Shell</string>
 			<key>precedence</key>
-			<integer>3</integer>
+			<real>0.4</real>
 		</dict>
 		<key>QSCLTermExecuteShellCommandAction</key>
 		<dict>
