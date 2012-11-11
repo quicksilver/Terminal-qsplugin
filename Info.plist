@@ -19,12 +19,12 @@
 	<key>CFBundleShortVersionString</key>
 	<string>2.2.2</string>
 	<key>CFBundleVersion</key>
-	<string>133</string>
+	<string>138</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2004, Blacktree, Inc.</string>
 	<key>QSActions</key>
 	<dict>
-		<key>QSCLExecuteShellCommandAction</key>
+		<key>QSCLExecuteTextAction</key>
 		<dict>
 			<key>actionClass</key>
 			<string>QSCLExecutableProvider</string>
@@ -34,7 +34,6 @@
 			<string>Run a Text Command in Shell</string>
 			<key>directTypes</key>
 			<array>
-				<string>qs.shellcommand</string>
 				<string>NSStringPboardType</string>
 			</array>
 			<key>displaysResult</key>
@@ -233,6 +232,8 @@
 &lt;h3&gt;Catalog Preset&lt;/h3&gt;
 &lt;p&gt;&lt;strong&gt;Bash Command History&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;This &lt;a href=&quot;qs://preferences#QSCatalogPrefPane&quot;&gt;Catalog&lt;/a&gt; Preset, found under &apos;Plugins &amp;gt; Bash Command History&apos; adds your bash history to the Quicksilver catalog (more accurately, it adds the contents of &lt;code&gt;~/.bash_history&lt;/code&gt; to your catalog).&lt;/p&gt;</string>
+		<key>icon</key>
+		<string>com.apple.Terminal</string>
 		<key>relatedPaths</key>
 		<array>
 			<string>~/.ssh</string>
@@ -242,8 +243,6 @@
 			<string>~/bin</string>
 			<string>~/.sh_history</string>
 		</array>
-		<key>icon</key>
-		<string>com.apple.Terminal</string>
 	</dict>
 	<key>QSPresetAdditions</key>
 	<array>
