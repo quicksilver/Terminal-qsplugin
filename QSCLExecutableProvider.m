@@ -9,13 +9,10 @@
 #define kQSCLTermShowDirectoryAction @"QSCLTermShowDirectoryAction"
 #define kQSCLTermShowManPageAction @"QSCLTermShowManPageAction"
 #define kQSCLTermOpenParentAction @"QSCLTermOpenParentAction"
-
+#define kQSShellScriptRunWithArgsAction @"QSShellScriptRunWithArgsAction"
 #define kQSCLExecuteTextAction @"QSCLExecuteTextAction"
 #define kQSCLTermExecuteTextAction @"QSCLTermExecuteTextAction"
 
-# define kShellScriptRunAction @"ShellScriptRunAction"
-# define kShellScriptTextRunAction @"ShellScriptTextRunAction"
-# define kShellScriptTextRunInTerminalAction @"ShellScriptTextRunInTerminalAction"
 #define QSShellScriptTypes [NSArray arrayWithObjects:@"sh",@"pl",@"command",@"php",@"py",@"'TEXT'",@"rb",@"",nil]
 
 @implementation QSCLExecutableProvider
@@ -51,7 +48,7 @@
                 return NO;
         }
         
-        if (executable) return [NSArray arrayWithObjects:kQSCLExecuteWithArgsAction, kQSCLTermExecuteWithArgsAction, kQSCLTermShowManPageAction, kQSCLTermOpenParentAction, nil];
+        if (executable) return [NSArray arrayWithObjects:kQSCLExecuteWithArgsAction, kQSCLTermExecuteWithArgsAction, kQSCLTermShowManPageAction, kQSCLTermOpenParentAction,kQSShellScriptRunWithArgsAction, nil];
     }
     
     return [NSArray arrayWithObject:kQSCLTermOpenParentAction];
@@ -188,9 +185,18 @@
   [self performCommandInTerminal:[NSString stringWithFormat:@"cd %@", [self escapeString:path]]];
 }
 
+-(void)displayOpenTerminalError {
+    NSBeep();
+    QSShowAppNotifWithAttributes(@"TerminalNotif", NSLocalizedStringFromTableInBundle(@"Terminal Plugin", nil, [NSBundle bundleForClass:[self class]], @""), NSLocalizedStringFromTableInBundle(@"Could not open directory", nil, [NSBundle bundleForClass:[self class]], @""));
+}
+
 - (QSObject *)showParentDirectoryInTerminal:(QSObject *)dObject
 {
   NSString *path = [dObject singleFilePath];
+    if (!path) {
+        [self displayOpenTerminalError];
+        return nil;
+    }
   NSArray *comps = [path pathComponents];
   if ([comps count] > 1) path = [NSString pathWithComponents:[comps subarrayWithRange:(NSRange){0, [comps count] - 1}]];
   [self openTerminalAtDirectory:path];
@@ -200,6 +206,10 @@
 - (QSObject *)showDirectoryInTerminal:(QSObject *)dObject
 {
   NSString *path = [dObject singleFilePath];
+    if (!path) {
+        [self displayOpenTerminalError];
+        return nil;
+    }
   [self openTerminalAtDirectory:path];
   return nil;
 }
