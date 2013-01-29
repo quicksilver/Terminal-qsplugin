@@ -86,10 +86,12 @@
         NSString *contents = [[NSString alloc] initWithData:buffer encoding:NSUTF8StringEncoding];
 
         NSScanner *scanner = [NSScanner scannerWithString:contents];
+        [contents release];
 
         /* Doesn't start with a shebang, there's nothing we can do */
-        if (![scanner scanString:@"#!" intoString:nil])
+        if (![scanner scanString:@"#!" intoString:nil]) {
             return nil;
+        }
 
         /* Scan the shebang line */
         NSString *shellLine = nil;
