@@ -13,8 +13,6 @@
 #define kQSCLExecuteTextAction @"QSCLExecuteTextAction"
 #define kQSCLTermExecuteTextAction @"QSCLTermExecuteTextAction"
 
-#define QSShellScriptTypes [NSArray arrayWithObjects:@"sh",@"pl",@"command",@"php",@"py",@"'TEXT'",@"rb",@"",nil]
-
 @implementation QSCLExecutableProvider
 
 - (NSArray *)validActionsForDirectObject:(QSObject *)dObject indirectObject:(QSObject *)iObject
@@ -29,7 +27,7 @@
     
     if (isDirectory) return [NSArray arrayWithObject:kQSCLTermShowDirectoryAction];
     
-    if ([QSShellScriptTypes containsObject:[dObject fileUTI]])
+    if (UTTypeConformsTo([dObject fileUTI], (CFStringRef)@"public.script"))
     {
         BOOL executable = [[NSFileManager defaultManager] isExecutableFileAtPath:path];
         if (!executable) {
