@@ -29,7 +29,7 @@
     
     if (isDirectory) return [NSArray arrayWithObject:kQSCLTermShowDirectoryAction];
     
-    if ([QSShellScriptTypes containsObject:[[NSFileManager defaultManager] typeOfFile:path]])
+    if ([QSShellScriptTypes containsObject:[dObject fileUTI]])
     {
         BOOL executable = [[NSFileManager defaultManager] isExecutableFileAtPath:path];
         if (!executable) {
@@ -42,9 +42,7 @@
             }
             [string release];
         } else {
-            LSItemInfoRecord infoRec;
-            LSCopyItemInfoForURL((CFURLRef) [NSURL fileURLWithPath:path], kLSRequestBasicFlagsOnly, &infoRec);
-            if (infoRec.flags & kLSItemInfoIsApplication) // Ignore applications
+            if ([dObject isApplication]) // Ignore applications
                 return NO;
         }
         
