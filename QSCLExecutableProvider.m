@@ -83,6 +83,7 @@
             return nil;
 
         NSData *buffer = [fileHandle readDataOfLength:1024];
+        [fileHandle closeFile];
         NSString *contents = [[NSString alloc] initWithData:buffer encoding:NSUTF8StringEncoding];
 
         NSScanner *scanner = [NSScanner scannerWithString:contents];
