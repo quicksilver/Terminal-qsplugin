@@ -9,6 +9,7 @@
 #import "QSTerminalMediator.h"
 
 @implementation QSRegistry (QSTerminalMediator)
+
 - (NSString *)preferredTerminalMediatorID{
 	NSString *key=[[NSUserDefaults standardUserDefaults] stringForKey:kQSTerminalMediators];
 	if (![[self tableNamed:kQSTerminalMediators]objectForKey:key])key=@"com.apple.Terminal";
@@ -30,8 +31,20 @@
 
 @implementation QSAppleTerminalMediator
 - (void)performCommandInTerminal:(NSString *)command{
-    NSAppleScript *termScript=[[[NSAppleScript alloc] initWithContentsOfURL:[NSURL fileURLWithPath:[[NSBundle bundleForClass:[self class]]pathForResource:@"Terminal" ofType:@"scpt"]] error:nil]autorelease];
-    [termScript executeSubroutine:@"do_script" arguments:command error:nil];
-    [[NSWorkspace sharedWorkspace] switchToApplication:[[NSWorkspace sharedWorkspace]dictForApplicationName:@"Terminal"] frontWindowOnly:YES];
+    TerminalApplication *t = [TerminalApplication application];
+    /* Can't do anything with windows/tabs atm
+    TerminalWindow *frontmost = nil;
+    SBElementArray *windows = [t windows];
+    NSIndexSet *frontmostIndex = [windows indexesOfObjectsWithOptions:NSEnumerationConcurrent passingTest:^BOOL(TerminalWindow *w, NSUInteger idx, BOOL *stop) {
+        return t.frontmost;
+    }];
+    if ([frontmostIndex count]) {
+        frontmost = [windows objectAtIndex:[frontmostIndex lastIndex]];
+    }
+    if (frontmost) {
+        
+    } */
+    [t doScript:command in:nil];
+    [t activate];
 }
 @end
