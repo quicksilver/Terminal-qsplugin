@@ -13,8 +13,6 @@
 #define kQSCLExecuteTextAction @"QSCLExecuteTextAction"
 #define kQSCLTermExecuteTextAction @"QSCLTermExecuteTextAction"
 
-#define QSShellScriptTypes [NSArray arrayWithObjects:@"sh",@"pl",@"command",@"php",@"py",@"'TEXT'",@"rb",@"",nil]
-
 @implementation QSCLExecutableProvider
 
 - (NSArray *)validActionsForDirectObject:(QSObject *)dObject indirectObject:(QSObject *)iObject
@@ -29,7 +27,7 @@
     
     if (isDirectory) return [NSArray arrayWithObject:kQSCLTermShowDirectoryAction];
     
-    if ([QSShellScriptTypes containsObject:[[NSFileManager defaultManager] typeOfFile:path]])
+    if (UTTypeConformsTo([dObject fileUTI], (CFStringRef)@"public.script"))
     {
         BOOL executable = [[NSFileManager defaultManager] isExecutableFileAtPath:path];
         if (!executable) {
@@ -42,9 +40,7 @@
             }
             [string release];
         } else {
-            LSItemInfoRecord infoRec;
-            LSCopyItemInfoForURL((CFURLRef) [NSURL fileURLWithPath:path], kLSRequestBasicFlagsOnly, &infoRec);
-            if (infoRec.flags & kLSItemInfoIsApplication) // Ignore applications
+            if ([dObject isApplication]) // Ignore applications
                 return NO;
         }
         
@@ -81,21 +77,35 @@
     NSString *taskPath=path;
     NSMutableArray *argArray=[NSMutableArray array]; 
     
-    if (!executable){
-        NSString *contents=[NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
-        NSScanner *scanner=[NSScanner scannerWithString:contents];
-        [argArray addObject:taskPath];
-        [scanner scanString:@"#!" intoString:nil];
-        [scanner scanUpToCharactersFromSet:[NSCharacterSet characterSetWithCharactersInString:@"\r\n"] intoString:&taskPath];
-    }//else if (!inTerminal){
-	 //taskPath=@"/bin/sh";
-	 //[argArray addObject:@"-c"];
-	 //[argArray addObject:taskPath];
-	 //}
-    
-    if ([arguments length]) {
-		[argArray addObjectsFromArray:[arguments componentsSeparatedByString:@" "]];
-	}
+    if (!executable) {
+        NSFileHandle *fileHandle = [NSFileHandle fileHandleForReadingAtPath:path];
+        if (!fileHandle)
+            return nil;
+
+        NSData *buffer = [fileHandle readDataOfLength:1024];
+        [fileHandle closeFile];
+        NSString *contents = [[NSString alloc] initWithData:buffer encoding:NSUTF8StringEncoding];
+
+        NSScanner *scanner = [NSScanner scannerWithString:contents];
+        [contents release];
+
+        /* Doesn't start with a shebang, there's nothing we can do */
+        if (![scanner scanString:@"#!" intoString:nil]) {
+            return nil;
+        }
+
+        /* Scan the shebang line */
+        NSString *shellLine = nil;
+        [scanner scanUpToCharactersFromSet:[NSCharacterSet newlineCharacterSet] intoString:&shellLine];
+
+        /* Split up the executable path and its parameters... */
+        NSArray *shellLineParameters = [shellLine componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        taskPath = [shellLineParameters head];
+        [argArray addObjectsFromArray:[shellLineParameters tail]];
+
+        /* ... and append the path to the actual file to execute */
+        [argArray addObject:path];
+    }
 	
     if (inTerminal) {
         NSString *fullCommand=[NSString stringWithFormat:@"%@ %@",[self escapeString:taskPath],[argArray componentsJoinedByString:@" "]];

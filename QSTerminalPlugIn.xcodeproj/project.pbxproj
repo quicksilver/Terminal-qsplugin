@@ -30,7 +30,7 @@
 		7FFA8E9C0816CCCA00A858CD /* QSEffects.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QSEffects.framework; sourceTree = QSFrameworks; };
 		7FFA8E9D0816CCCA00A858CD /* QSInterface.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QSInterface.framework; sourceTree = QSFrameworks; };
 		8D1AC9730486D14A00FE50C9 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		8D1AC9740486D14A00FE50C9 /* Terminal Module.qsplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "Terminal Module.qsplugin"; path = "Terminal Plugin.qsplugin"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D1AC9740486D14A00FE50C9 /* Terminal Plugin.qsplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Terminal Plugin.qsplugin"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD793EB913CF8D3300B3773B /* Terminal.original.scpt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.scpt; path = Terminal.original.scpt; sourceTree = "<group>"; };
 		CD793EBF13CF8D6800B3773B /* QSSudoPasswordAlert.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QSSudoPasswordAlert.xib; sourceTree = "<group>"; };
 		D40FD3A715A39810008979BE /* Common.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Common.xcconfig; sourceTree = "<group>"; };
@@ -83,7 +83,7 @@
 		1ED78706FE9D4A0611CA0C5A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8D1AC9740486D14A00FE50C9 /* Terminal Module.qsplugin */,
+				8D1AC9740486D14A00FE50C9 /* Terminal Plugin.qsplugin */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -162,7 +162,7 @@
 			name = "Terminal Module";
 			productInstallPath = "$(HOME)/Developer/Palettes";
 			productName = QSTerminalPlugIn;
-			productReference = 8D1AC9740486D14A00FE50C9 /* Terminal Module.qsplugin */;
+			productReference = 8D1AC9740486D14A00FE50C9 /* Terminal Plugin.qsplugin */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
