@@ -39,7 +39,7 @@
 		7FE52C13082B12AC00BFD611 /* QSCLExecutableProvider.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = QSCLExecutableProvider.h; sourceTree = "<group>"; };
 		7FE52C14082B12AC00BFD611 /* QSTerminalMediator.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = QSTerminalMediator.h; sourceTree = "<group>"; };
 		7FE52C16082B12AC00BFD611 /* QSCLExecutableProvider.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = QSCLExecutableProvider.m; sourceTree = "<group>"; };
-		7FE52C17082B12AC00BFD611 /* QSTerminalMediator.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = QSTerminalMediator.m; sourceTree = "<group>"; };
+		7FE52C17082B12AC00BFD611 /* QSTerminalMediator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSTerminalMediator.m; sourceTree = "<group>"; };
 		7FFA8E9C0816CCCA00A858CD /* QSEffects.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QSEffects.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FFA8E9D0816CCCA00A858CD /* QSInterface.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QSInterface.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D1AC9730486D14A00FE50C9 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
