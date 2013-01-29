@@ -82,7 +82,13 @@
     NSMutableArray *argArray=[NSMutableArray array]; 
     
     if (!executable) {
-        NSString *contents = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
+        NSFileHandle *fileHandle = [NSFileHandle fileHandleForReadingAtPath:path];
+        if (!fileHandle)
+            return nil;
+
+        NSData *buffer = [fileHandle readDataOfLength:1024];
+        NSString *contents = [[NSString alloc] initWithData:buffer encoding:NSUTF8StringEncoding];
+
         NSScanner *scanner = [NSScanner scannerWithString:contents];
 
         /* Doesn't start with a shebang, there's nothing we can do */
