@@ -32,11 +32,10 @@
 @implementation QSAppleTerminalMediator
 - (void)performCommandInTerminal:(NSString *)command{
     
-    // used to decide whether or not to open a new tab to execute the command. If Terminal isn't running, don't launch it *and* open a new tab
-    BOOL terminalRunning = (BOOL) [[NSRunningApplication runningApplicationsWithBundleIdentifier:@"com.apple.Terminal"] count];
-    
     TerminalApplication *t = [SBApplication applicationWithBundleIdentifier:@"com.apple.Terminal"];
-
+    
+    BOOL terminalRunning = [t isRunning];
+    
     TerminalWindow *frontmost = nil;
     SBElementArray *windows = [t windows];
     NSIndexSet *frontmostIndex = [windows indexesOfObjectsWithOptions:NSEnumerationConcurrent passingTest:^BOOL(TerminalWindow *w, NSUInteger idx, BOOL *stop) {
@@ -76,8 +75,7 @@
     } else {
         // in the future we should be able to use 'in:tab' to do the script in our new tab... if/when Tabs work in AS/SB
         [t doScript:command in:nil];
+        [t activate];
     }
-
-    [t activate];
 }
 @end
