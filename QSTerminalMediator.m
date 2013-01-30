@@ -32,6 +32,9 @@
 @implementation QSAppleTerminalMediator
 - (void)performCommandInTerminal:(NSString *)command{
     
+    // used to decide whether or not to open a new tab to execute the command. If Terminal isn't running, don't launch it *and* open a new tab
+    BOOL terminalRunning = (BOOL) [[NSRunningApplication runningApplicationsWithBundleIdentifier:@"com.apple.Terminal"] count];
+    
     TerminalApplication *t = [SBApplication applicationWithBundleIdentifier:@"com.apple.Terminal"];
 
     TerminalWindow *frontmost = nil;
@@ -55,18 +58,20 @@
         
         [t activate];
         
-        // simulate CMD-T. 
-        CGEventSourceRef source = CGEventSourceCreate(kCGEventSourceStatePrivate);
-        CGEventRef keyDown = CGEventCreateKeyboardEvent (source, (CGKeyCode)17, true); //T
-        CGEventSetFlags(keyDown, kCGEventFlagMaskCommand);
-        CGEventPost(kCGHIDEventTap, keyDown);
-
-        CGEventRef keyUp = CGEventCreateKeyboardEvent (source, (CGKeyCode)17, false); //T key up
-        CGEventSetFlags(keyUp, kCGEventFlagMaskCommand);
-        CGEventPost(kCGHIDEventTap, keyUp);
-        CFRelease(keyDown);
-        CFRelease(keyUp);
-        CFRelease(source);
+        if (terminalRunning) {
+            // simulate CMD-T.
+            CGEventSourceRef source = CGEventSourceCreate(kCGEventSourceStatePrivate);
+            CGEventRef keyDown = CGEventCreateKeyboardEvent (source, (CGKeyCode)17, true); //T
+            CGEventSetFlags(keyDown, kCGEventFlagMaskCommand);
+            CGEventPost(kCGHIDEventTap, keyDown);
+            
+            CGEventRef keyUp = CGEventCreateKeyboardEvent (source, (CGKeyCode)17, false); //T key up
+            CGEventSetFlags(keyUp, kCGEventFlagMaskCommand);
+            CGEventPost(kCGHIDEventTap, keyUp);
+            CFRelease(keyDown);
+            CFRelease(keyUp);
+            CFRelease(source);
+        }
         [t doScript:command in:frontmost];
     } else {
         // in the future we should be able to use 'in:tab' to do the script in our new tab... if/when Tabs work in AS/SB
