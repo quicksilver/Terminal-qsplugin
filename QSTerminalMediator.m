@@ -34,28 +34,25 @@
     
     TerminalApplication *t = [SBApplication applicationWithBundleIdentifier:@"com.apple.Terminal"];
     
-    BOOL terminalRunning = [t isRunning];
-    
-    TerminalWindow *frontmost = nil;
-    SBElementArray *windows = [t windows];
-    NSIndexSet *frontmostIndex = [windows indexesOfObjectsWithOptions:NSEnumerationConcurrent passingTest:^BOOL(TerminalWindow *w, NSUInteger idx, BOOL *stop) {
-        return w.index == 1;
-    }];
-    if ([frontmostIndex count]) {
-        frontmost = [windows objectAtIndex:[frontmostIndex lastIndex]];
-    }
-    
     // when tabs are made to work in Terminal, use this (will they ever?)
     /*
     TerminalTab *tab = [[[[t classForScriptingClass:@"tab"] alloc] init] autorelease];
     [[frontmost tabs] insertObject:tab atIndex:0];
      */
 
-    
     // developer feature!
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"QSTerminalUseTabs"] && frontmost) {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"QSTerminalUseTabs"]) {
         
-        [t activate];
+        BOOL terminalRunning = [t isRunning];
+
+        TerminalWindow *frontmost = nil;
+        SBElementArray *windows = [t windows];
+        NSIndexSet *frontmostIndex = [windows indexesOfObjectsWithOptions:NSEnumerationConcurrent passingTest:^BOOL(TerminalWindow *w, NSUInteger idx, BOOL *stop) {
+            return w.index == 1;
+        }];
+        if ([frontmostIndex count]) {
+            frontmost = [windows objectAtIndex:[frontmostIndex lastIndex]];
+        }
         
         if (terminalRunning) {
             // simulate CMD-T.
@@ -75,7 +72,7 @@
     } else {
         // in the future we should be able to use 'in:tab' to do the script in our new tab... if/when Tabs work in AS/SB
         [t doScript:command in:nil];
-        [t activate];
     }
+    [t activate];
 }
 @end
