@@ -9,6 +9,7 @@
 #import "QSTerminalMediator.h"
 
 @implementation QSRegistry (QSTerminalMediator)
+
 - (NSString *)preferredTerminalMediatorID{
 	NSString *key=[[NSUserDefaults standardUserDefaults] stringForKey:kQSTerminalMediators];
 	if (![[self tableNamed:kQSTerminalMediators]objectForKey:key])key=@"com.apple.Terminal";
@@ -30,8 +31,48 @@
 
 @implementation QSAppleTerminalMediator
 - (void)performCommandInTerminal:(NSString *)command{
-    NSAppleScript *termScript=[[[NSAppleScript alloc] initWithContentsOfURL:[NSURL fileURLWithPath:[[NSBundle bundleForClass:[self class]]pathForResource:@"Terminal" ofType:@"scpt"]] error:nil]autorelease];
-    [termScript executeSubroutine:@"do_script" arguments:command error:nil];
-    [[NSWorkspace sharedWorkspace] switchToApplication:[[NSWorkspace sharedWorkspace]dictForApplicationName:@"Terminal"] frontWindowOnly:YES];
+    
+    TerminalApplication *t = [SBApplication applicationWithBundleIdentifier:@"com.apple.Terminal"];
+    
+    // when tabs are made to work in Terminal, use this (will they ever?)
+    /*
+    TerminalTab *tab = [[[[t classForScriptingClass:@"tab"] alloc] init] autorelease];
+    [[frontmost tabs] insertObject:tab atIndex:0];
+     */
+
+    // developer feature!
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"QSTerminalUseTabs"]) {
+        
+        BOOL terminalRunning = [t isRunning];
+
+        TerminalWindow *frontmost = nil;
+        SBElementArray *windows = [t windows];
+        NSIndexSet *frontmostIndex = [windows indexesOfObjectsWithOptions:NSEnumerationConcurrent passingTest:^BOOL(TerminalWindow *w, NSUInteger idx, BOOL *stop) {
+            return w.index == 1;
+        }];
+        if ([frontmostIndex count]) {
+            frontmost = [windows objectAtIndex:[frontmostIndex lastIndex]];
+        }
+        
+        if (terminalRunning) {
+            // simulate CMD-T.
+            CGEventSourceRef source = CGEventSourceCreate(kCGEventSourceStatePrivate);
+            CGEventRef keyDown = CGEventCreateKeyboardEvent (source, (CGKeyCode)17, true); //T
+            CGEventSetFlags(keyDown, kCGEventFlagMaskCommand);
+            CGEventPost(kCGHIDEventTap, keyDown);
+            
+            CGEventRef keyUp = CGEventCreateKeyboardEvent (source, (CGKeyCode)17, false); //T key up
+            CGEventSetFlags(keyUp, kCGEventFlagMaskCommand);
+            CGEventPost(kCGHIDEventTap, keyUp);
+            CFRelease(keyDown);
+            CFRelease(keyUp);
+            CFRelease(source);
+        }
+        [t doScript:command in:frontmost];
+    } else {
+        // in the future we should be able to use 'in:tab' to do the script in our new tab... if/when Tabs work in AS/SB
+        [t doScript:command in:nil];
+    }
+    [t activate];
 }
 @end

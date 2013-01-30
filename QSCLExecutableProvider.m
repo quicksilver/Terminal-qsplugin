@@ -27,7 +27,7 @@
     
     if (isDirectory) return [NSArray arrayWithObject:kQSCLTermShowDirectoryAction];
     
-    if (UTTypeConformsTo([dObject fileUTI], (CFStringRef)@"public.script"))
+    if (UTTypeConformsTo((CFStringRef)[dObject fileUTI], (CFStringRef)@"public.script") || UTTypeConformsTo((CFStringRef)[dObject fileUTI], (CFStringRef)@"public.executable"))
     {
         BOOL executable = [[NSFileManager defaultManager] isExecutableFileAtPath:path];
         if (!executable) {

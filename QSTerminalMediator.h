@@ -6,6 +6,9 @@
 //  Copyright 2004 __MyCompanyName__. All rights reserved.
 //
 
+#import "Terminal.h"
+
+
 #define kQSTerminalMediators @"QSTerminalMediators"
 
 @protocol QSTerminalMediator
