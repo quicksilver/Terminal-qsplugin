@@ -7,32 +7,46 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7F35FF4007F9ACD90056051D /* QSCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F35FF3C07F9ACD90056051D /* QSCore.framework */; };
-		7F35FF4207F9ACD90056051D /* QSFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F35FF3E07F9ACD90056051D /* QSFoundation.framework */; };
 		7FE52C18082B12AC00BFD611 /* QSCLExecutableProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FE52C16082B12AC00BFD611 /* QSCLExecutableProvider.m */; };
 		7FE52C19082B12AC00BFD611 /* QSTerminalMediator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FE52C17082B12AC00BFD611 /* QSTerminalMediator.m */; };
-		7FE52C46082B149E00BFD611 /* Terminal.scpt in Resources */ = {isa = PBXBuildFile; fileRef = 7FE52C1A082B12B100BFD611 /* Terminal.scpt */; };
 		8D1AC9700486D14A00FE50C9 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD92D38A0106425D02CA0E72 /* Cocoa.framework */; };
+		CD04070616B889030083D33B /* QSCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F35FF3C07F9ACD90056051D /* QSCore.framework */; };
+		CD04070816B889060083D33B /* QSFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F35FF3E07F9ACD90056051D /* QSFoundation.framework */; };
+		CD04070B16B889200083D33B /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD04070916B889190083D33B /* ScriptingBridge.framework */; };
+		CD04070D16B889760083D33B /* Terminal.app in Resources */ = {isa = PBXBuildFile; fileRef = CD8B399616B881310000F06E /* Terminal.app */; };
 		CD793EC013CF8D6800B3773B /* QSSudoPasswordAlert.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD793EBF13CF8D6800B3773B /* QSSudoPasswordAlert.xib */; };
+		CD8B399F16B884A20000F06E /* Terminal.app in Sources */ = {isa = PBXBuildFile; fileRef = CD8B399616B881310000F06E /* Terminal.app */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXBuildRule section */
+		CD8B399E16B8819B0000F06E /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			filePatterns = "*.app";
+			fileType = pattern.proxy;
+			isEditable = 1;
+			outputFiles = (
+				"$(DERIVED_FILES_DIR)/$(INPUT_FILE_BASE).h",
+			);
+			script = "sdef \"$INPUT_FILE_PATH\" | sdp -fh -o \"$DERIVED_FILES_DIR\" --basename \"$INPUT_FILE_BASE\" --bundleid `defaults read \"$INPUT_FILE_PATH/Contents/Info\" CFBundleIdentifier`";
+		};
+/* End PBXBuildRule section */
 
 /* Begin PBXFileReference section */
 		32DBCF980370C29C00C91783 /* QSTerminalPlugIn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSTerminalPlugIn.h; sourceTree = "<group>"; };
-		7F35FF3C07F9ACD90056051D /* QSCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QSCore.framework; sourceTree = QSFrameworks; };
-		7F35FF3D07F9ACD90056051D /* QSEffects.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QSEffects.framework; sourceTree = QSFrameworks; };
-		7F35FF3E07F9ACD90056051D /* QSFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QSFoundation.framework; sourceTree = QSFrameworks; };
-		7F35FF3F07F9ACD90056051D /* QSInterface.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QSInterface.framework; sourceTree = QSFrameworks; };
+		7F35FF3C07F9ACD90056051D /* QSCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QSCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F35FF3E07F9ACD90056051D /* QSFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QSFoundation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FE52C13082B12AC00BFD611 /* QSCLExecutableProvider.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = QSCLExecutableProvider.h; sourceTree = "<group>"; };
 		7FE52C14082B12AC00BFD611 /* QSTerminalMediator.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = QSTerminalMediator.h; sourceTree = "<group>"; };
 		7FE52C16082B12AC00BFD611 /* QSCLExecutableProvider.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = QSCLExecutableProvider.m; sourceTree = "<group>"; };
-		7FE52C17082B12AC00BFD611 /* QSTerminalMediator.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = QSTerminalMediator.m; sourceTree = "<group>"; };
-		7FE52C1A082B12B100BFD611 /* Terminal.scpt */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.scpt; path = Terminal.scpt; sourceTree = "<group>"; };
-		7FFA8E9C0816CCCA00A858CD /* QSEffects.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QSEffects.framework; sourceTree = QSFrameworks; };
-		7FFA8E9D0816CCCA00A858CD /* QSInterface.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QSInterface.framework; sourceTree = QSFrameworks; };
+		7FE52C17082B12AC00BFD611 /* QSTerminalMediator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSTerminalMediator.m; sourceTree = "<group>"; };
+		7FFA8E9C0816CCCA00A858CD /* QSEffects.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QSEffects.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7FFA8E9D0816CCCA00A858CD /* QSInterface.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QSInterface.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D1AC9730486D14A00FE50C9 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D1AC9740486D14A00FE50C9 /* Terminal Plugin.qsplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Terminal Plugin.qsplugin"; sourceTree = BUILT_PRODUCTS_DIR; };
-		CD793EB913CF8D3300B3773B /* Terminal.original.scpt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.scpt; path = Terminal.original.scpt; sourceTree = "<group>"; };
+		CD04070916B889190083D33B /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = System/Library/Frameworks/ScriptingBridge.framework; sourceTree = SDKROOT; };
 		CD793EBF13CF8D6800B3773B /* QSSudoPasswordAlert.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QSSudoPasswordAlert.xib; sourceTree = "<group>"; };
+		CD8B399616B881310000F06E /* Terminal.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; name = Terminal.app; path = /Applications/Utilities/Terminal.app; sourceTree = "<absolute>"; };
 		D40FD3A715A39810008979BE /* Common.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Common.xcconfig; sourceTree = "<group>"; };
 		D40FD3A815A39810008979BE /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		D40FD3A915A39810008979BE /* Developer.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Developer.xcconfig; sourceTree = "<group>"; };
@@ -47,9 +61,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD04070B16B889200083D33B /* ScriptingBridge.framework in Frameworks */,
 				8D1AC9700486D14A00FE50C9 /* Cocoa.framework in Frameworks */,
-				7F35FF4007F9ACD90056051D /* QSCore.framework in Frameworks */,
-				7F35FF4207F9ACD90056051D /* QSFoundation.framework in Frameworks */,
+				CD04070616B889030083D33B /* QSCore.framework in Frameworks */,
+				CD04070816B889060083D33B /* QSFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,6 +74,7 @@
 		0259C574FE90428111CA0C5A /* QSTerminalPlugIn */ = {
 			isa = PBXGroup;
 			children = (
+				CD8B399616B881310000F06E /* Terminal.app */,
 				D40FD3A615A39810008979BE /* Configuration */,
 				32DBCF9E0370C38000C91783 /* Classes */,
 				32DBCF9F0370C38200C91783 /* Other Sources */,
@@ -73,8 +89,6 @@
 			isa = PBXGroup;
 			children = (
 				CD793EBF13CF8D6800B3773B /* QSSudoPasswordAlert.xib */,
-				CD793EB913CF8D3300B3773B /* Terminal.original.scpt */,
-				7FE52C1A082B12B100BFD611 /* Terminal.scpt */,
 				8D1AC9730486D14A00FE50C9 /* Info.plist */,
 			);
 			name = Resources;
@@ -91,12 +105,12 @@
 		2E58F364FFB232C311CA0CBA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CD04070916B889190083D33B /* ScriptingBridge.framework */,
 				DD92D38A0106425D02CA0E72 /* Cocoa.framework */,
 				7F35FF3C07F9ACD90056051D /* QSCore.framework */,
 				7F35FF3E07F9ACD90056051D /* QSFoundation.framework */,
 				7FFA8E9C0816CCCA00A858CD /* QSEffects.framework */,
 				7FFA8E9D0816CCCA00A858CD /* QSInterface.framework */,
-				7FC20C8107FB741700FDD3CA /* Other Frameworks */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -120,15 +134,6 @@
 			name = "Other Sources";
 			sourceTree = "<group>";
 		};
-		7FC20C8107FB741700FDD3CA /* Other Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				7F35FF3D07F9ACD90056051D /* QSEffects.framework */,
-				7F35FF3F07F9ACD90056051D /* QSInterface.framework */,
-			);
-			name = "Other Frameworks";
-			sourceTree = "<group>";
-		};
 		D40FD3A615A39810008979BE /* Configuration */ = {
 			isa = PBXGroup;
 			children = (
@@ -146,9 +151,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8D1AC9600486D14A00FE50C9 /* Terminal Module */ = {
+		8D1AC9600486D14A00FE50C9 /* Terminal Plugin */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7FFF2575085E488700266176 /* Build configuration list for PBXNativeTarget "Terminal Module" */;
+			buildConfigurationList = 7FFF2575085E488700266176 /* Build configuration list for PBXNativeTarget "Terminal Plugin" */;
 			buildPhases = (
 				E1022B2806B3475D00299BEC /* Update Version and Documentation */,
 				8D1AC9660486D14A00FE50C9 /* Resources */,
@@ -156,10 +161,11 @@
 				8D1AC96E0486D14A00FE50C9 /* Frameworks */,
 			);
 			buildRules = (
+				CD8B399E16B8819B0000F06E /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
-			name = "Terminal Module";
+			name = "Terminal Plugin";
 			productInstallPath = "$(HOME)/Developer/Palettes";
 			productName = QSTerminalPlugIn;
 			productReference = 8D1AC9740486D14A00FE50C9 /* Terminal Plugin.qsplugin */;
@@ -187,7 +193,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8D1AC9600486D14A00FE50C9 /* Terminal Module */,
+				8D1AC9600486D14A00FE50C9 /* Terminal Plugin */,
 			);
 		};
 /* End PBXProject section */
@@ -197,8 +203,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7FE52C46082B149E00BFD611 /* Terminal.scpt in Resources */,
 				CD793EC013CF8D6800B3773B /* QSSudoPasswordAlert.xib in Resources */,
+				CD04070D16B889760083D33B /* Terminal.app in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -226,6 +232,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD8B399F16B884A20000F06E /* Terminal.app in Sources */,
 				7FE52C18082B12AC00BFD611 /* QSCLExecutableProvider.m in Sources */,
 				7FE52C19082B12AC00BFD611 /* QSTerminalMediator.m in Sources */,
 			);
@@ -241,7 +248,6 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				OTHER_LDFLAGS = "-bundle";
 				PRODUCT_NAME = "Terminal Plugin";
-				ZERO_LINK = YES;
 			};
 			name = Debug;
 		};
@@ -252,7 +258,6 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				OTHER_LDFLAGS = "-bundle";
 				PRODUCT_NAME = "Terminal Plugin";
-				ZERO_LINK = NO;
 			};
 			name = Release;
 		};
@@ -274,7 +279,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		7FFF2575085E488700266176 /* Build configuration list for PBXNativeTarget "Terminal Module" */ = {
+		7FFF2575085E488700266176 /* Build configuration list for PBXNativeTarget "Terminal Plugin" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7FFF2576085E488700266176 /* Debug */,
