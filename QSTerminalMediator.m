@@ -39,7 +39,7 @@
     TerminalTab *tab = [[[[t classForScriptingClass:@"tab"] alloc] init] autorelease];
     [[frontmost tabs] insertObject:tab atIndex:0];
      */
-
+    [t activate];
     // developer feature!
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"QSTerminalUseTabs"]) {
         
@@ -73,6 +73,5 @@
         // in the future we should be able to use 'in:tab' to do the script in our new tab... if/when Tabs work in AS/SB
         [t doScript:command in:nil];
     }
-    [t activate];
 }
 @end
