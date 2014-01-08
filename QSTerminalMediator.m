@@ -39,11 +39,12 @@
     TerminalTab *tab = [[[[t classForScriptingClass:@"tab"] alloc] init] autorelease];
     [[frontmost tabs] insertObject:tab atIndex:0];
      */
+    BOOL terminalRunning = [t isRunning];
+
     [t activate];
     // developer feature!
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"QSTerminalUseTabs"]) {
-        
-        BOOL terminalRunning = [t isRunning];
+        usleep(terminalRunning ? 10000 : 250000);
 
         TerminalWindow *frontmost = nil;
         SBElementArray *windows = [t windows];
@@ -54,7 +55,7 @@
             frontmost = [windows objectAtIndex:[frontmostIndex lastIndex]];
         }
         
-        if (terminalRunning) {
+        if (terminalRunning && frontmost) {
             // simulate CMD-T.
             CGEventSourceRef source = CGEventSourceCreate(kCGEventSourceStatePrivate);
             CGEventRef keyDown = CGEventCreateKeyboardEvent (source, (CGKeyCode)17, true); //T
@@ -67,6 +68,7 @@
             CFRelease(keyDown);
             CFRelease(keyUp);
             CFRelease(source);
+            usleep(10000);
         }
         [t doScript:command in:frontmost];
     } else {
