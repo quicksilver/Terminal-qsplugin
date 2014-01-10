@@ -247,7 +247,7 @@
 				[NSBundle loadNibNamed:@"QSSudoPasswordAlert" owner:self];
 			}
 			[window makeKeyAndOrderFront:self];
-			int result = [NSApp runModalForWindow:window];
+			NSInteger result = [NSApp runModalForWindow:window];
 			[window close];
 			
 			if (!result){
