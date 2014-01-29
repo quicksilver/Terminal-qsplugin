@@ -17,7 +17,7 @@
 
 - (NSArray *)validActionsForDirectObject:(QSObject *)dObject indirectObject:(QSObject *)iObject
 {
-  if ([dObject objectForType:NSFilenamesPboardType])
+  if ([dObject objectForType:QSFilePathType])
   {
     NSString *path = [dObject singleFilePath];
     if (!path) return nil;
