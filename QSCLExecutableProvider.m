@@ -76,6 +76,7 @@
     
     NSString *taskPath=path;
     NSMutableArray *argArray=[NSMutableArray array]; 
+    NSCharacterSet *ws = [NSCharacterSet whitespaceCharacterSet];
     
     if (!executable) {
         NSFileHandle *fileHandle = [NSFileHandle fileHandleForReadingAtPath:path];
@@ -99,12 +100,18 @@
         [scanner scanUpToCharactersFromSet:[NSCharacterSet newlineCharacterSet] intoString:&shellLine];
 
         /* Split up the executable path and its parameters... */
-        NSArray *shellLineParameters = [shellLine componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        NSArray *shellLineParameters = [shellLine componentsSeparatedByCharactersInSet:ws];
         taskPath = [shellLineParameters head];
         [argArray addObjectsFromArray:[shellLineParameters tail]];
 
         /* ... and append the path to the actual file to execute */
         [argArray addObject:path];
+    }
+    
+    // include arguments for the command
+    if ([arguments length]) {
+        NSArray *commandArguments = [arguments componentsSeparatedByCharactersInSet:ws];
+        [argArray addObjectsFromArray:commandArguments];
     }
 	
     if (inTerminal) {
