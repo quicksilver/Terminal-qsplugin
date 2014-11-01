@@ -17,9 +17,9 @@
 	<key>CFBundlePackageType</key>
 	<string>BNDL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2.3.4</string>
+	<string>2.4.0</string>
 	<key>CFBundleVersion</key>
-	<string>147</string>
+	<string>14A</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2004, Blacktree, Inc.</string>
 	<key>QSActions</key>
@@ -32,9 +32,15 @@
 			<string>executeText:</string>
 			<key>description</key>
 			<string>Run a Text Command in Shell</string>
+			<key>directFileTypes</key>
+			<array>
+				<string>public.executable</string>
+				<string>public.script</string>
+			</array>
 			<key>directTypes</key>
 			<array>
-				<string>NSStringPboardType</string>
+				<string>public.utf8-plain-text</string>
+				<string>public.data</string>
 			</array>
 			<key>displaysResult</key>
 			<true/>
@@ -51,9 +57,16 @@
 			<string>QSCLExecutableProvider</string>
 			<key>actionSelector</key>
 			<string>executeTextInTerminal:</string>
+			<key>directFileTypes</key>
+			<array>
+				<string>public.executable</string>
+				<string>public.script</string>
+			</array>
 			<key>directTypes</key>
 			<array>
 				<string>qs.shellcommand</string>
+				<string>public.utf8-plain-text</string>
+				<string>public.data</string>
 			</array>
 			<key>icon</key>
 			<string>TerminalIcon</string>
@@ -68,9 +81,15 @@
 			<string>QSCLExecutableProvider</string>
 			<key>actionSelector</key>
 			<string>executeTextInTerminal:</string>
+			<key>directFileTypes</key>
+			<array>
+				<string>public.executable</string>
+				<string>public.script</string>
+			</array>
 			<key>directTypes</key>
 			<array>
-				<string>NSStringPboardType</string>
+				<string>public.utf8-plain-text</string>
+				<string>public.executable</string>
 			</array>
 			<key>icon</key>
 			<string>TerminalIcon</string>
@@ -89,17 +108,10 @@
 			<array>
 				<string>public.executable</string>
 				<string>public.script</string>
-				<string>sh</string>
-				<string>command</string>
-				<string>php</string>
-				<string>pl</string>
-				<string>py</string>
-				<string>rb</string>
-				<string></string>
 			</array>
 			<key>directTypes</key>
 			<array>
-				<string>NSFilenamesPboardType</string>
+				<string>public.data</string>
 			</array>
 			<key>icon</key>
 			<string>TerminalIcon</string>
@@ -120,7 +132,7 @@
 			<string>showParentDirectoryInTerminal:</string>
 			<key>directTypes</key>
 			<array>
-				<string>NSFilenamesPboardType</string>
+				<string>public.data</string>
 			</array>
 			<key>icon</key>
 			<string>TerminalIcon</string>
@@ -135,16 +147,18 @@
 			<string>QSCLExecutableProvider</string>
 			<key>actionSelector</key>
 			<string>showDirectoryInTerminal:</string>
+			<key>directFileTypes</key>
+			<array>
+				<string>public.directory</string>
+			</array>
 			<key>directTypes</key>
 			<array>
-				<string>NSFilenamesPboardType</string>
+				<string>public.data</string>
 			</array>
 			<key>icon</key>
 			<string>TerminalIcon</string>
 			<key>name</key>
 			<string>Open Directory in Terminal</string>
-			<key>validatesObjects</key>
-			<true/>
 		</dict>
 		<key>QSCLTermShowManPageAction</key>
 		<dict>
@@ -154,13 +168,12 @@
 			<string>showManPage:</string>
 			<key>directFileTypes</key>
 			<array>
-				<string></string>
 				<string>public.executable</string>
 				<string>public.script</string>
 			</array>
 			<key>directTypes</key>
 			<array>
-				<string>NSFilenamesPboardType</string>
+				<string>public.data</string>
 			</array>
 			<key>icon</key>
 			<string>TerminalIcon</string>
@@ -179,19 +192,12 @@
 			<string>Run a Shell Script [with optional arguments]</string>
 			<key>directFileTypes</key>
 			<array>
-				<string>public.script</string>
 				<string>public.executable</string>
-				<string>sh</string>
-				<string>pl</string>
-				<string>command</string>
-				<string>php</string>
-				<string>py</string>
-				<string>rb</string>
-				<string></string>
+				<string>public.script</string>
 			</array>
 			<key>directTypes</key>
 			<array>
-				<string>NSFilenamesPboardType</string>
+				<string>public.data</string>
 			</array>
 			<key>displaysResult</key>
 			<true/>
@@ -309,7 +315,7 @@
 	<key>QSRequirements</key>
 	<dict>
 		<key>version</key>
-		<string>4001</string>
+		<string>400E</string>
 	</dict>
 </dict>
 </plist>
