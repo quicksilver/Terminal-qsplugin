@@ -48,8 +48,6 @@
 			<string>ExecutableBinaryIcon</string>
 			<key>name</key>
 			<string>Run Command in Shell</string>
-			<key>precedence</key>
-			<real>0.4</real>
 		</dict>
 		<key>QSCLTermExecuteShellCommandAction</key>
 		<dict>
@@ -72,8 +70,6 @@
 			<string>TerminalIcon</string>
 			<key>name</key>
 			<string>Run a Text Command in Terminal</string>
-			<key>precedence</key>
-			<integer>4</integer>
 		</dict>
 		<key>QSCLTermExecuteTextAction</key>
 		<dict>
@@ -119,8 +115,6 @@
 			<true/>
 			<key>name</key>
 			<string>Run in Terminal […]</string>
-			<key>rankModification</key>
-			<real>2.0</real>
 			<key>validatesObjects</key>
 			<true/>
 		</dict>
@@ -207,8 +201,6 @@
 			<true/>
 			<key>name</key>
 			<string>Run […]</string>
-			<key>rankModification</key>
-			<real>2.0</real>
 			<key>validatesObjects</key>
 			<true/>
 		</dict>
