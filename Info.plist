@@ -19,7 +19,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>2.4.1</string>
 	<key>CFBundleVersion</key>
-	<string>14C</string>
+	<string>14D</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2004, Blacktree, Inc.</string>
 	<key>QSActions</key>
@@ -70,15 +70,9 @@
 			<string>QSCLExecutableProvider</string>
 			<key>actionSelector</key>
 			<string>executeTextInTerminal:</string>
-			<key>directFileTypes</key>
-			<array>
-				<string>public.executable</string>
-				<string>public.script</string>
-			</array>
 			<key>directTypes</key>
 			<array>
 				<string>public.utf8-plain-text</string>
-				<string>public.executable</string>
 			</array>
 			<key>icon</key>
 			<string>TerminalIcon</string>
