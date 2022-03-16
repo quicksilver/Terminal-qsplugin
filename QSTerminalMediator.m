@@ -44,7 +44,7 @@
     [t activate];
     // developer feature!
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"QSTerminalUseTabs"]) {
-        usleep(terminalRunning ? 10000 : 250000);
+        usleep(terminalRunning ? 5000 : 200000);
 
         TerminalWindow *frontmost = nil;
         SBElementArray *windows = [t windows];
@@ -68,7 +68,7 @@
             CFRelease(keyDown);
             CFRelease(keyUp);
             CFRelease(source);
-            usleep(10000);
+            usleep(5000);
         }
         [t doScript:command in:frontmost];
     } else {
