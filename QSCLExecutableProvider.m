@@ -6,6 +6,7 @@
 #define kQSCLExecuteWithArgsAction @"QSShellScriptRunAction"
 //#define kQSCLTermExecuteAction @"QSCLTermExecuteAction"
 #define kQSCLTermExecuteWithArgsAction @"QSCLTermExecuteWithArgsAction"
+#define kQSCLTermExecuteWithRequiredArgsAction @"QSCLTermExecuteWithRequiredArgsAction"
 #define kQSCLTermShowDirectoryAction @"QSCLTermShowDirectoryAction"
 #define kQSCLTermShowManPageAction @"QSCLTermShowManPageAction"
 #define kQSCLTermOpenParentAction @"QSCLTermOpenParentAction"
@@ -44,7 +45,7 @@
                 return NO;
         }
         
-        if (executable) return [NSArray arrayWithObjects:kQSCLExecuteWithArgsAction, kQSCLTermExecuteWithArgsAction, kQSCLTermShowManPageAction, kQSCLTermOpenParentAction,kQSShellScriptRunWithArgsAction, nil];
+        if (executable) return [NSArray arrayWithObjects:kQSCLExecuteWithArgsAction, kQSCLTermExecuteWithArgsAction, kQSCLTermExecuteWithRequiredArgsAction, kQSCLTermShowManPageAction, kQSCLTermOpenParentAction,kQSShellScriptRunWithArgsAction, nil];
     }
     
     return [NSArray arrayWithObject:kQSCLTermOpenParentAction];
@@ -246,24 +247,30 @@
 		[task setStandardInput:[NSPipe pipe]];
 		[task setStandardError:[NSPipe pipe]];
 		[task launch];
-		NSData *data= [[[task standardError]fileHandleForReading]availableData];
+		NSData *data= [[[task standardError] fileHandleForReading] availableData];
 
 		// Password is required
 		if ([data length]) {
-			if (!window) {
-				[NSBundle loadNibNamed:@"QSSudoPasswordAlert" owner:self];
-			}
-			[window makeKeyAndOrderFront:self];
-			NSInteger result = [NSApp runModalForWindow:window];
-			[window close];
+			__block NSModalResponse result = 0;
+			__block NSString *string = nil;
+			QSGCDMainSync(^{
+				if (!window) {
+					[NSBundle loadNibNamed:@"QSSudoPasswordAlert" owner:self];
+				}
+				[window makeKeyAndOrderFront:self];
+				result = [NSApp runModalForWindow:window];
+				if (result) {
+					// Obtains the password from the window, initial first responder is always the secure text field
+					string = [[[(NSSecureTextField *)[window initialFirstResponder] stringValue] stringByAppendingString:@"\n"] copy];
+				}
+				[window close];
+			});
 			
 			if (!result){
 				[task interrupt];
 				return NO;
 			}
-			// Obtains the password from the window, initial first responder is always the secure text field
-			NSString *string=[(NSSecureTextField *)[window initialFirstResponder] stringValue];
-			string=[string stringByAppendingString:@"\n"];
+			
 			NSData *writeData = [string dataUsingEncoding:NSUTF8StringEncoding];
 			[[[task standardInput]fileHandleForWriting] writeData:writeData];
 			[[[task standardInput]fileHandleForWriting] closeFile];

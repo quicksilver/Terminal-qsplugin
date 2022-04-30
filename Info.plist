@@ -17,9 +17,9 @@
 	<key>CFBundlePackageType</key>
 	<string>BNDL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2.5.1</string>
+	<string>2.6.0</string>
 	<key>CFBundleVersion</key>
-	<string>150</string>
+	<string>151</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2004, Blacktree, Inc.</string>
 	<key>QSActions</key>
@@ -104,6 +104,34 @@
 			<string>Run in Terminal […]</string>
 			<key>validatesObjects</key>
 			<true/>
+		</dict>
+		<key>QSCLTermExecuteWithRequiredArgsAction</key>
+		<dict>
+			<key>actionClass</key>
+			<string>QSCLExecutableProvider</string>
+			<key>actionSelector</key>
+			<string>executeObjectInTerm:arguments:</string>
+			<key>description</key>
+			<string>Run a Shell Script in the Terminal with required arguments (useful for triggers)</string>
+			<key>directFileTypes</key>
+			<array>
+				<string>public.executable</string>
+				<string>public.script</string>
+			</array>
+			<key>directTypes</key>
+			<array>
+				<string>public.data</string>
+			</array>
+			<key>icon</key>
+			<string>TerminalIcon</string>
+			<key>indirectOptional</key>
+			<false/>
+			<key>name</key>
+			<string>Run in Terminal with Arguments</string>
+			<key>validatesObjects</key>
+			<true/>
+			<key>enabled</key>
+			<string>NO</string>
 		</dict>
 		<key>QSCLTermOpenParentAction</key>
 		<dict>
