@@ -28,7 +28,7 @@
     
     if (isDirectory) return [NSArray arrayWithObject:kQSCLTermShowDirectoryAction];
     
-    if (UTTypeConformsTo((CFStringRef)[dObject fileUTI], (CFStringRef)@"public.script") || UTTypeConformsTo((CFStringRef)[dObject fileUTI], (CFStringRef)@"public.executable"))
+    if ([dObject isExecutable] || UTTypeConformsTo((CFStringRef)[dObject fileUTI], (CFStringRef)@"public.script") || UTTypeConformsTo((CFStringRef)[dObject fileUTI], (CFStringRef)@"public.executable"))
     {
         BOOL executable = [[NSFileManager defaultManager] isExecutableFileAtPath:path];
         if (!executable) {
@@ -45,7 +45,9 @@
                 return NO;
         }
         
-        if (executable) return [NSArray arrayWithObjects:kQSCLExecuteWithArgsAction, kQSCLTermExecuteWithArgsAction, kQSCLTermExecuteWithRequiredArgsAction, kQSCLTermShowManPageAction, kQSCLTermOpenParentAction,kQSShellScriptRunWithArgsAction, nil];
+		if (executable) {
+			return [NSArray arrayWithObjects:kQSCLExecuteWithArgsAction, kQSCLTermExecuteWithArgsAction, kQSCLTermExecuteWithRequiredArgsAction, kQSCLTermShowManPageAction, kQSCLTermOpenParentAction,kQSShellScriptRunWithArgsAction, nil];
+		}
     }
     
     return [NSArray arrayWithObject:kQSCLTermOpenParentAction];

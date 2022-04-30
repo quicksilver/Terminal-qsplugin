@@ -32,11 +32,6 @@
 			<string>executeText:</string>
 			<key>description</key>
 			<string>Run a Text Command in Shell</string>
-			<key>directFileTypes</key>
-			<array>
-				<string>public.executable</string>
-				<string>public.script</string>
-			</array>
 			<key>directTypes</key>
 			<array>
 				<string>public.utf8-plain-text</string>
@@ -87,11 +82,6 @@
 			<string>executeObjectInTerm:arguments:</string>
 			<key>description</key>
 			<string>Run a Shell Script in the Terminal [with optional arguments]</string>
-			<key>directFileTypes</key>
-			<array>
-				<string>public.executable</string>
-				<string>public.script</string>
-			</array>
 			<key>directTypes</key>
 			<array>
 				<string>public.data</string>
@@ -113,11 +103,6 @@
 			<string>executeObjectInTerm:arguments:</string>
 			<key>description</key>
 			<string>Run a Shell Script in the Terminal with required arguments (useful for triggers)</string>
-			<key>directFileTypes</key>
-			<array>
-				<string>public.executable</string>
-				<string>public.script</string>
-			</array>
 			<key>directTypes</key>
 			<array>
 				<string>public.data</string>
@@ -199,11 +184,6 @@
 			<string>executeObject:arguments:</string>
 			<key>description</key>
 			<string>Run a Shell Script [with optional arguments]</string>
-			<key>directFileTypes</key>
-			<array>
-				<string>public.executable</string>
-				<string>public.script</string>
-			</array>
 			<key>directTypes</key>
 			<array>
 				<string>public.data</string>
