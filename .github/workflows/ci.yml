@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    runs-on: macos-13
+    runs-on: macos-latest
     env:
       QS_BUILD_ONLY: 1
       QS_SOURCE_ROOT: "/tmp/git/quicksilver"
@@ -101,14 +101,14 @@ jobs:
       run: |
         tar -czvf "${PLUGIN_NAME}.tar.gz" "${PLUGIN_NAME}"
     - name: Upload components for sign action
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: UNSIGNED_PLUGIN
         path: /tmp/QS/build/Release/Quicksilver.app/Contents/PlugIns/${{ env.PLUGIN_NAME }}.tar.gz
 
   sign:
     needs: build
-    runs-on: macos-13
+    runs-on: macos-latest
     env:
       MACOS_CERTIFICATE: ${{ secrets.MACOS_CERTIFICATE }}
       MACOS_CERTIFICATE_PASSWORD: ${{ secrets.MACOS_CERTIFICATE_PASSWORD }}
@@ -117,7 +117,7 @@ jobs:
       SIGNING_IDENTITY: ${{ secrets.SIGNING_IDENTITY }}
     steps:
     - name: Download targz artifact
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v4
       with:
         name: UNSIGNED_PLUGIN
         path: /tmp/QS/build/Release/
@@ -151,7 +151,7 @@ jobs:
         echo "PLUGIN_NAME=${PLUGIN_NAME}" >> $GITHUB_ENV
         tar -czvf "${PLUGIN_NAME}.tar.gz" "${PLUGIN_NAME}"
     - name: Upload document
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: SIGNED_PLUGIN
         path: /tmp/QS/build/Release/${{ env.PLUGIN_NAME }}.tar.gz
