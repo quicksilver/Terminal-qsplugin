@@ -127,14 +127,25 @@
         [task setLaunchPath:taskPath];
         [task setArguments:argArray];
         [task setStandardOutput:[NSPipe pipe]];
-        [task launch];
+        NSError *err = nil;
+        BOOL success = [task launchAndReturnError:&err];
+        if (!success) {
+            NSLog(@"Error launching task: %@", err);
+            QSShowAppNotifWithAttributes(@"QSTerminalPlugin", NSLocalizedStringForThisBundle(@"Error executing task", @"Error message when terminal executable command failed"), [err localizedDescription]);
+            return nil;
+        }
         [task waitUntilExit];
+        
 		// NSLog(@"Run Task: %@ %@",taskPath,argArray);
         
         NSString *string=[[[NSString alloc] initWithData:[[[task standardOutput]fileHandleForReading] readDataToEndOfFile] encoding:NSUTF8StringEncoding]autorelease];
         int status = [task terminationStatus];
-        if (status == 0) NSLog(@"Task succeeded.");
-        else NSLog(@"Task failed.");
+        if (status == 0) {
+            //NSLog(@"Task succeeded.");
+        } else {
+            QSShowAppNotifWithAttributes(@"QSTerminalPlugin", NSLocalizedStringForThisBundle(@"Error executing task", @"Error message when terminal executable command failed"), NSLocalizedStringForThisBundle(@"Task failed", @""));
+            NSLog(@"Task failed.");
+        }
         return string;
 	}
 	return nil;
